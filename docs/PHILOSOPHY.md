@@ -80,3 +80,9 @@ You will **not** automatically get my whole desktop (Foot pass-through, Hyprland
 [LEARNING.md](LEARNING.md) = the cleaned path I recommend.
 
 **Bottom line:** if classic editor intuition is already in your hands, this config refuses the idea that you must erase it to use Neovim.
+
+## Gratitude & ownership
+
+I have not created Neovim, LazyVim, or the plugins. This repo is a **personal collection of config files** — glue and opinions on top of other people’s work. Full thanks: [CREDITS.md](CREDITS.md).
+
+Fork it, delete what you dislike, remap everything. It is a start, not a standard you owe loyalty to.

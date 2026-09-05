@@ -2,6 +2,8 @@
 
 Personal [LazyVim](https://www.lazyvim.org/) config used on [Omarchy](https://omarchy.org/) Linux.
 
+**I did not create these tools.** This is only my personal collection of opinionated config files — a start. The credit belongs to the open source community (Neovim, LazyVim, plugins, Omarchy, and everyone upstream). See [docs/CREDITS.md](docs/CREDITS.md). After you clone it, **change anything you want.**
+
 ## Who this is for
 
 People who are **already comfortable** in normal text/code editors — the lifelong intuition of `Ctrl+C` / `Ctrl+V` / `Ctrl+Z` / `Ctrl+S` / `Ctrl+F` and friends.
@@ -19,6 +21,7 @@ Full opinion: [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 | [docs/SHORTCUTS.md](docs/SHORTCUTS.md) | Full shortcut reference (VS Code layer + important Vim) |
 | [docs/LEARNING.md](docs/LEARNING.md) | How to learn this config — practice path |
 | [docs/TERMINAL.md](docs/TERMINAL.md) | Foot / terminal notes (Ctrl+Shift chords) |
+| [docs/CREDITS.md](docs/CREDITS.md) | Gratitude to open source — this is config, not my invention |
 | [docs/journal/](docs/journal/) | My raw learning notes while picking up Vim |
 
 Full machine backup (Hyprland, Foot, Omarchy themes, …):  
@@ -89,10 +92,11 @@ lua/plugins/vscode-ux.lua           mini.move + multicursor
 lua/plugins/snacks-*.lua            bottom / floating terminal
 lua/plugins/theme.lua               colorscheme (Omarchy symlink)
 lua/plugins/omarchy-theme-hotreload.lua
-docs/                               philosophy, shortcuts, learning
+docs/                               philosophy, shortcuts, learning, credits
 docs/journal/                       personal Vim notes
 ```
 
-## License
+## License & credit
 
-Apache-2.0 (upstream LazyVim starter template).
+Apache-2.0 for this starter layout (upstream LazyVim template).  
+Plugins keep their own licenses. I am not the author of those tools — only of these configs and notes. See [docs/CREDITS.md](docs/CREDITS.md).
