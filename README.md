@@ -2,9 +2,14 @@
 
 Personal [LazyVim](https://www.lazyvim.org/) config used on [Omarchy](https://omarchy.org/) Linux.
 
-**Goal:** keep Neovim light (no Electron IDE RAM), keep a few VS Code chords for comfort, and grow real speed through **Vim motions** + **`Space` (leader)**.
+## Who this is for
 
-This is not a neutral starter. It encodes how I actually work after years of VS Code/Cursor and a deliberate move to LazyVim.
+People who are **already comfortable** in normal text/code editors — the lifelong intuition of `Ctrl+C` / `Ctrl+V` / `Ctrl+Z` / `Ctrl+S` / `Ctrl+F` and friends.
+
+Brand-new Vim often says: *forget all of that and learn a new language from zero.*  
+**Why should we have to?** This config keeps those universal shortcuts first-class, stays **lightweight** (no Electron IDE RAM), and treats real Vim / `Space` (leader) as a **growth path**, not a gate.
+
+Full opinion: [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
 ## Start here
 

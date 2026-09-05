@@ -1,55 +1,82 @@
 # Philosophy — why this config exists
 
-This setup is **opinionated**. It is not trying to recreate Cursor or VS Code inside Neovim. It is trying to keep what was good about those editors without their cost.
+## Who this is for
 
-## The problem
+This config is for people who are **already comfortable in normal text and code editors**.
 
-VS Code and Cursor feel great: familiar keys, nice UI, agents. On a machine that is not swimming in RAM, they are heavy. I wanted:
+From childhood (or from years of Notepad, Word, browsers, VS Code, Cursor…), most of us built the same intuition:
 
-1. **Lightweight** — Neovim / LazyVim instead of an Electron IDE  
-2. **Familiar enough** — some Ctrl+ shortcuts so I am not blocked on day one  
-3. **Actually faster long-term** — Vim motions and LazyVim’s `Space` leader  
+- `Ctrl+C` copy  
+- `Ctrl+V` paste  
+- `Ctrl+X` cut  
+- `Ctrl+Z` undo  
+- `Ctrl+S` save  
+- `Ctrl+F` find  
+- `Ctrl+A` select all  
+- tabs, explorer, arrows + Shift to select, and the rest of that family  
 
-## What I believe after using this
+That muscle memory is not “wrong.” It is how almost every mainstream editor on Earth works.
 
-These Vim habits beat most of the VS Code chrome for me:
+## The question that started this
 
-| Habit | Why it wins |
-|-------|-------------|
-| `hjkl` | Navigation without leaving home row |
-| `u` / `Ctrl-R` | Undo / redo without chord gymnastics |
-| `vw`, `vig`, visual + `y`/`d`/`c` | Select then act — one language |
-| `dd` | Delete line instantly in normal mode |
-| `/` then `n`/`N` | Find is faster than a find widget for me |
+When you open brand‑new Vim / Neovim, the default story is often:
 
-So this config **keeps** a VS Code layer for comfort, but **documents and encourages** the Vim path as the real power.
+> Forget all of that. Learn a completely new language of keys from zero.
+
+**Why should we have to?**
+
+If the goal is a lighter, faster tool — not a personality transplant — then Neovim should **respect the intuition you already have**, and invite Vim power as an *upgrade*, not as a gate.
+
+That thinking is why this LazyVim config exists.
+
+## What I actually wanted
+
+1. **Keep the universal shortcuts** — so day one feels like an editor, not a puzzle  
+2. **Stay lightweight** — Neovim / LazyVim instead of a heavy Electron IDE eating RAM  
+3. **Optionally go deeper** — `hjkl`, `/`, `dd`, visual + `y`/`d`/`c`, and `Space` (leader) when *you* are ready  
+
+So this is not “VS Code clones Neovim.”  
+It is: **your lifelong editor intuition first; Vim speed second; low RAM always.**
+
+## What I discovered after living in it
+
+The universal Ctrl keys get you productive immediately.  
+Some Vim habits then become *better* than the old ways for specific jobs:
+
+| Habit | Why it can win later |
+|-------|----------------------|
+| `hjkl` | Navigate without leaving home row |
+| `u` | Undo is one key — still fine beside `Ctrl+Z` |
+| `vw` / `vig` then `y`/`d`/`c` | Select, then act — one language |
+| `dd` | Delete a line instantly |
+| `/` then `n`/`N` | Find without a heavy widget (for me) |
+
+You do **not** need to throw away `Ctrl+C` / `Ctrl+V` to earn those.  
+Both layers live here on purpose.
 
 ## Design rules
 
-1. **Ctrl keys = comfort / migration** — save, tabs, explorer, palette, terminal, LSP labels you already know.  
-2. **`/` = find** — Ctrl+F only jumps into `/`. I do not want a heavy find UI as the default.  
-3. **Replace is separate** — Ctrl+Shift+H opens replace-in-file (grug-far). Project replace is `Space` `s` `r`.  
-4. **Leader (`Space`) = LazyVim power menu** — learn this; which-key teaches you.  
-5. **No agent sidebar goal** — AI tools can live elsewhere. This repo is the editor.  
-6. **Omarchy-friendly** — theme symlink / hot-reload when on Omarchy; optional elsewhere.
+1. **Universal Ctrl keys = first-class** — copy, paste, cut, undo, save, tabs, explorer, palette, terminal, LSP labels you already know.  
+2. **Vim / leader = growth path** — documented in [LEARNING.md](LEARNING.md), not forced as a wall.  
+3. **`/` = preferred find** — `Ctrl+F` simply starts `/` so the old reflex still works.  
+4. **Replace is explicit** — `Ctrl+Shift+H` for this file; `Space` `s` `r` for the project.  
+5. **Leader (`Space`) = LazyVim power menu** — press Space and wait; which-key teaches you.  
+6. **No agent-sidebar requirement** — this repo is the editor.  
+7. **Omarchy-friendly** — theme symlink when on Omarchy; optional elsewhere.
 
 ## What “same config” means for clones
 
-If you clone this repo into `~/.config/nvim` and run `nvim`, you should get:
+If you clone this into `~/.config/nvim` and run `nvim`, you should get:
 
-- The same custom keymaps and plugins listed in [SHORTCUTS.md](SHORTCUTS.md)  
-- LazyVim’s leader groups and defaults  
+- The familiar Ctrl shortcuts listed in [SHORTCUTS.md](SHORTCUTS.md)  
+- LazyVim’s `Space` leader groups  
 - The same learning path in [LEARNING.md](LEARNING.md)  
 
-You will **not** automatically get:
-
-- My Foot terminal key pass-through (see [TERMINAL.md](TERMINAL.md))  
-- Omarchy desktop / Hyprland (see the private `dotfiles` repo)  
-- Every language server until Mason/Lazy extras install for your languages  
+You will **not** automatically get my whole desktop (Foot pass-through, Hyprland, themes) — that is the private `dotfiles` repo. See [TERMINAL.md](TERMINAL.md) for chord caveats.
 
 ## Tone of the learning docs
 
-[journal/](journal/) holds **my** notes while learning — informal, incomplete, personal.  
-[LEARNING.md](LEARNING.md) is the cleaned path I recommend others follow with this config.
+[journal/](journal/) = my raw notes while learning Vim (personal voice).  
+[LEARNING.md](LEARNING.md) = the cleaned path I recommend.
 
-Use both. The journal is the opinion. The learning guide is the curriculum.
+**Bottom line:** if classic editor intuition is already in your hands, this config refuses the idea that you must erase it to use Neovim.

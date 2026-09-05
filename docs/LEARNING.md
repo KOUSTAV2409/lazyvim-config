@@ -1,7 +1,10 @@
 # Learning this setup
 
-You do not need to memorize everything in [SHORTCUTS.md](SHORTCUTS.md) on day one.  
-Use the VS Code chords when stuck; invest in Vim + `Space` for speed.
+**You already know how to use an editor.**  
+`Ctrl+C`, `Ctrl+V`, `Ctrl+S`, and the rest are intentional here — see [PHILOSOPHY.md](PHILOSOPHY.md). You do not have to throw them away to “deserve” Neovim.
+
+You also do not need to memorize everything in [SHORTCUTS.md](SHORTCUTS.md) on day one.  
+Use the familiar Ctrl keys whenever you want. Add Vim + `Space` when *you* want more speed.
 
 My raw notes while learning: [journal/vimshortcut.md](journal/vimshortcut.md).
 
@@ -9,10 +12,11 @@ My raw notes while learning: [journal/vimshortcut.md](journal/vimshortcut.md).
 
 ## Mindset
 
-1. **Normal mode is home.** `Esc` often. Insert is for typing, not navigating.  
-2. **Verb + motion** is the language: `d`/`c`/`y` + `w`/`$`/`iw`/`ip`…  
-3. **`Space` is a menu.** Pause after Space; read which-key; pick a letter.  
-4. **Three keys a day.** Stop adding more until those three are automatic.
+1. **Familiar keys are allowed forever** — they are not training wheels you must remove.  
+2. **Normal mode is home for Vim power.** `Esc` often. Insert is for typing.  
+3. **Verb + motion** is the optional upgrade: `d`/`c`/`y` + `w`/`$`/`iw`…  
+4. **`Space` is a menu.** Pause after Space; read which-key; pick a letter.  
+5. **Three new Vim keys a day** when you choose to learn — not all at once.
 
 ---
 
