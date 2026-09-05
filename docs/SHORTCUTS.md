@@ -1,8 +1,10 @@
 # Shortcuts reference
 
+These Ctrl shortcuts exist so people with **normal editor intuition** (`Ctrl+C` / `Ctrl+V` / …) can use Neovim without throwing away what they already know. Vim and `Space` are extras — see [PHILOSOPHY.md](PHILOSOPHY.md).
+
 Legend: **N** normal · **I** insert · **V** visual · **T** terminal
 
-This config adds a VS Code–style layer on top of LazyVim. LazyVim’s own keys (especially `Space` …) still work.
+This config adds that familiar layer on top of LazyVim. LazyVim’s own keys (especially `Space` …) still work.
 
 ---
 
