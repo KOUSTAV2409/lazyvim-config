@@ -43,7 +43,7 @@ This config adds that familiar layer on top of LazyVim. LazyVim’s own keys (es
 | `Ctrl+Shift+H` | N | Replace in **current file** (grug-far) |
 | `Ctrl+Shift+H` | V | Replace using visual selection in file |
 | `Space` `s` `r` | N/V | Search & replace (project / filtered) |
-| `Ctrl+B` | N/I/V | Toggle file explorer (Neo-tree) |
+| `Ctrl+B` | N/I/V/T (+ inside explorer) | Toggle file explorer (always) |
 | `Ctrl+Shift+E` | N/I/V | Focus explorer |
 | `Ctrl+W` | N/I/V | Close tab (buffer) safely |
 | `Ctrl+Tab` / `Ctrl+Shift+Tab` | N/I/V | Next / previous tab |

@@ -78,8 +78,39 @@ map("v", "<C-S-h>", function()
   end
 end, { desc = "Replace Selection in File" })
 
-map({ "n", "i", "v" }, "<C-b>", "<Esc><cmd>Neotree toggle<cr>", { desc = "Toggle Explorer" })
-map({ "n", "i", "v" }, "<C-S-e>", "<Esc><cmd>Neotree focus<cr>", { desc = "Focus Explorer" })
+local function toggle_explorer()
+  local ok, cmd = pcall(require, "neo-tree.command")
+  if not ok then
+    vim.cmd("Neotree toggle")
+    return
+  end
+  cmd.execute({ toggle = true, dir = LazyVim.root() })
+end
+
+-- Ctrl+B: toggle explorer from *anywhere* (editor, insert, visual, terminal, neo-tree)
+map({ "n", "i", "v", "x" }, "<C-b>", function()
+  if vim.fn.mode():find("[iR]") then
+    vim.cmd("stopinsert")
+  end
+  toggle_explorer()
+end, { desc = "Toggle Explorer" })
+
+map("t", "<C-b>", function()
+  vim.cmd("stopinsert")
+  vim.schedule(toggle_explorer)
+end, { desc = "Toggle Explorer" })
+
+map({ "n", "i", "v" }, "<C-S-e>", function()
+  if vim.fn.mode():find("[iR]") then
+    vim.cmd("stopinsert")
+  end
+  local ok, cmd = pcall(require, "neo-tree.command")
+  if ok then
+    cmd.execute({ action = "focus", dir = LazyVim.root() })
+  else
+    vim.cmd("Neotree focus")
+  end
+end, { desc = "Focus Explorer" })
 
 map({ "n", "i", "v" }, "<C-w>", function()
   Snacks.bufdelete()
