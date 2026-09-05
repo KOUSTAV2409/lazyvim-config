@@ -1,18 +1,27 @@
-# LazyVim — Omarchy + VS Code muscle memory
+# LazyVim — opinionated Omarchy setup
 
-Personal [LazyVim](https://www.lazyvim.org/) config for [Omarchy](https://omarchy.org/) Linux.
-Keeps Neovim light, while mapping familiar VS Code chords where they still help.
-Vim motions and `<leader>` (`Space`) are the long-term speed path.
+Personal [LazyVim](https://www.lazyvim.org/) config used on [Omarchy](https://omarchy.org/) Linux.
 
-## Highlights
+**Goal:** keep Neovim light (no Electron IDE RAM), keep a few VS Code chords for comfort, and grow real speed through **Vim motions** + **`Space` (leader)**.
 
-- **VS Code–style keys** for save, tabs, explorer, palette, LSP, multi-cursor
-- **Native `/` find** (preferred); **Ctrl+Shift+H** for replace in current file
-- **Bottom terminal panel** (`Ctrl+\``) + floating terminal (`Ctrl+Shift+\``)
-- **Omarchy theme hot-reload** via `lua/plugins/theme.lua` symlink
-- Snacks picker (LazyVim 8 default) — not Telescope
+This is not a neutral starter. It encodes how I actually work after years of VS Code/Cursor and a deliberate move to LazyVim.
+
+## Start here
+
+| Doc | What it is |
+|-----|------------|
+| [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) | Why this setup exists (opinionated) |
+| [docs/SHORTCUTS.md](docs/SHORTCUTS.md) | Full shortcut reference (VS Code layer + important Vim) |
+| [docs/LEARNING.md](docs/LEARNING.md) | How to learn this config — practice path |
+| [docs/TERMINAL.md](docs/TERMINAL.md) | Foot / terminal notes (Ctrl+Shift chords) |
+| [docs/journal/](docs/journal/) | My raw learning notes while picking up Vim |
+
+Full machine backup (Hyprland, Foot, Omarchy themes, …):  
+https://github.com/KOUSTAV2409/dotfiles *(private)*
 
 ## Install
+
+Requires Neovim **0.11+** (LazyVim 8).
 
 ```bash
 # backup any existing config
@@ -22,77 +31,63 @@ git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 nvim
 ```
 
-On Omarchy, `lua/plugins/theme.lua` should point at the active theme:
+First launch installs plugins (needs network). Wait until Lazy finishes.
 
-```text
-~/.config/nvim/lua/plugins/theme.lua
-  → ~/.local/state/omarchy/current/theme/neovim.lua
-```
+### Theme (Omarchy)
 
-If that symlink is missing after clone:
+On Omarchy, `lua/plugins/theme.lua` is a symlink to the active theme:
 
 ```bash
 ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
   ~/.config/nvim/lua/plugins/theme.lua
 ```
 
-## Everyday VS Code–ish keys
+### Theme (any other system)
 
-| Key | Action |
-|-----|--------|
-| `Ctrl+P` | Quick Open |
-| `Ctrl+Shift+P` | Command palette |
-| `Ctrl+F` | Find (`/` under the hood) |
-| `Ctrl+Shift+F` | Find in project |
-| `Ctrl+Shift+H` | Replace in current file |
-| `Ctrl+B` | Toggle explorer |
-| `Ctrl+\`` | Toggle terminal panel |
-| `Ctrl+Shift+\`` | Floating terminal |
-| `F12` / `F2` / `Ctrl+.` | Definition / rename / code action |
-| `Alt+↑/↓` | Move line |
-| `Ctrl+Alt+↑/↓` | Multi-cursor |
+Replace the symlink with a normal colorscheme plugin, for example create `lua/plugins/theme.lua`:
 
-## Learn Vim + Space (leader)
+```lua
+return {
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight",
+    },
+  },
+}
+```
 
-Press `Space` and wait — which-key shows every group.
+Shortcuts and behavior do **not** depend on Omarchy — only the theme hot-reload does.
 
-| Space + | Group |
-|---------|--------|
-| `f` | file / find |
-| `s` | search (incl. `sr` project replace) |
-| `g` | git / lazygit |
-| `b` | buffers |
-| `c` | code / LSP |
-| `x` | diagnostics |
-| `u` | UI toggles |
-| `q` | quit / session |
+## What you get immediately
 
-High-ROI motions to practice next:
+- VS Code–familiar keys: save, tabs, explorer, quick open, palette, LSP, multi-cursor, terminal panel  
+- Prefer **`/`** for find (Ctrl+F just starts `/`)  
+- **Ctrl+Shift+H** → replace in current file (replace / replace-all UI)  
+- LazyVim defaults still work: press **`Space`** and wait for which-key  
 
-- `w` `b` `e` — words
-- `f`/`t` + char — jump on line
-- `ci"` `di(` — change/delete inside
-- `.` — repeat last change
-- `*` then `n` — word under cursor
-- `s` — Flash jump (LazyVim)
-
-**Practice rule:** three new keys a day until automatic.
+Read [docs/SHORTCUTS.md](docs/SHORTCUTS.md) for the full table.  
+Read [docs/LEARNING.md](docs/LEARNING.md) to learn Vim the way this config expects.
 
 ## Layout
 
 ```text
-lua/config/keymaps.lua     VS Code–familiar maps + replace
-lua/config/options.lua     comfort options
-lua/plugins/vscode-ux.lua  mini.move + multicursor
-lua/plugins/snacks-*.lua   terminal panel
-lua/plugins/theme.lua      Omarchy theme (symlink)
+lua/config/keymaps.lua              VS Code–familiar maps + replace
+lua/config/options.lua              comfort options
+lua/plugins/vscode-ux.lua           mini.move + multicursor
+lua/plugins/snacks-*.lua            bottom / floating terminal
+lua/plugins/theme.lua               colorscheme (Omarchy symlink)
+lua/plugins/omarchy-theme-hotreload.lua
+docs/                               philosophy, shortcuts, learning
+docs/journal/                       personal Vim notes
 ```
-
-## Foot tip
-
-This config pairs with Foot CSI-u pass-through for `Ctrl+\`` and Ctrl+Shift chords.
-See `~/.config/foot/foot.ini` on the Omarchy machine (not in this repo).
 
 ## License
 
-Apache-2.0 (upstream LazyVim starter).
+Apache-2.0 (upstream LazyVim starter template).

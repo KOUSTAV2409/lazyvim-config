@@ -1,0 +1,11 @@
+Hi , hellow , how are you? are all okay?
+i think everything is okay now right?
+there is no problem exactly in this bjp lead west bengal. people are happy with this change or paribartan. right?
+
+So now this is written with the append command with "a".. it is all fine now . and it is running beutifully.
+
+Hey , this is written with neovim or rather i should call it lazyvim created by teez. i do not the spelling properly but i think this is what it is and whatever it is i do not know but this is beutiful. i think i am slowly learning this vim commands.
+ 
+ so this is a test line to test dw , de and d$ offcourse. i have already tried dw . now trying de in the next line.
+
+ this  so tso tso t
