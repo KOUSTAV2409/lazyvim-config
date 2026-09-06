@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css?v=4" />
+  <link rel="stylesheet" href="assets/site.css?v=5" />
 </head>
 <body>
   <nav class="top">
@@ -33,10 +33,10 @@
     </div>
   </nav>
 
-  <header class="hero">
-    <img class="hero__img" src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
-    <div class="hero__shade"></div>
-    <div class="hero__copy">
+  <header class="scene scene--hero">
+    <img class="scene__img" src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+    <div class="scene__shade scene__shade--hero"></div>
+    <div class="scene__frame">
       <p class="eyebrow">Omarchy · LazyVim · personal config</p>
       <h1>Keep the keys<br /><em>you already love.</em></h1>
       <p class="lede">
@@ -50,54 +50,55 @@
     </div>
   </header>
 
-  <section class="band">
-    <div class="band__visual">
-      <img src="assets/learn.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
-    </div>
-    <div class="band__text">
-      <h2>For people who already edit.</h2>
-      <p>
+  <section class="scene scene--tall">
+    <img class="scene__img" src="assets/learn.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--left"></div>
+    <div class="scene__frame scene__frame--mid">
+      <p class="eyebrow">Intuition</p>
+      <h2>For people who<br /><em>already edit.</em></h2>
+      <p class="lede">
         Ctrl+C, Ctrl+V, Ctrl+Z, Ctrl+S, Ctrl+F — that intuition is not wrong.
-        This config keeps it first-class, then invites real Vim when <em>you</em> are ready.
+        This config keeps it first-class, then invites real Vim when <em class="glow">you</em> are ready.
       </p>
-      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Read the learning path →</a>
+      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Read the learning path</a>
     </div>
   </section>
 
-  <section class="gallery-quote">
-    <img src="assets/flow.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
-    <blockquote>
-      <p>Why should a faster tool demand a personality transplant?</p>
-      <cite>Your lifelong editor intuition first. Vim speed second. Low RAM always.</cite>
+  <section class="scene scene--quote">
+    <img class="scene__img" src="assets/flow.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--center"></div>
+    <blockquote class="scene__frame scene__frame--center">
+      <p class="quote">Why should a faster tool demand a personality transplant?</p>
+      <cite>Lifelong editor intuition first · Vim speed second · Low RAM always</cite>
     </blockquote>
   </section>
 
-  <section class="section" id="keys">
-    <div class="section__head">
-      <h2>Day-one keys</h2>
-      <p>Familiar chords on day one. LazyVim which-key still lives under Space.</p>
+  <section class="scene scene--tall" id="keys">
+    <img class="scene__img scene__img--keys" src="assets/hero.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--keys"></div>
+    <div class="scene__frame scene__frame--wide">
+      <p class="eyebrow">Day one</p>
+      <h2>Familiar chords.<br /><em>No ceremony.</em></h2>
+      <p class="lede lede--short">LazyVim which-key still lives under Space when you want to grow.</p>
+      <ul class="keygrid">
+        <li><kbd>Ctrl+S</kbd><span>Save</span></li>
+        <li><kbd>Ctrl+P</kbd><span>Quick open</span></li>
+        <li><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></li>
+        <li><kbd>Ctrl+B</kbd><span>Explorer</span></li>
+        <li><kbd>/</kbd><span>Find</span></li>
+        <li><kbd>Space</kbd><span>Leader · which-key</span></li>
+      </ul>
+      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">Full shortcuts</a>
     </div>
-    <ul class="keygrid">
-      <li><kbd>Ctrl+S</kbd><span>Save</span></li>
-      <li><kbd>Ctrl+P</kbd><span>Quick open</span></li>
-      <li><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></li>
-      <li><kbd>Ctrl+B</kbd><span>Explorer</span></li>
-      <li><kbd>/</kbd><span>Find</span></li>
-      <li><kbd>Space</kbd><span>Leader · which-key</span></li>
-    </ul>
-    <p class="fine">
-      Full table in
-      <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">SHORTCUTS.md</a>.
-    </p>
   </section>
 
-  <section class="band band--reverse" id="craft">
-    <div class="band__visual">
-      <img src="assets/craft.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
-    </div>
-    <div class="band__text">
-      <h2>Craft over chrome.</h2>
-      <p>
+  <section class="scene scene--tall" id="craft">
+    <img class="scene__img" src="assets/craft.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--right"></div>
+    <div class="scene__frame scene__frame--right">
+      <p class="eyebrow">Weight</p>
+      <h2>Craft over<br /><em>chrome.</em></h2>
+      <p class="lede">
         Neovim weight instead of another Electron IDE.
         Grown on Omarchy; theme hot-reload is optional.
         Shortcuts work anywhere Neovim 0.11+ runs.
@@ -105,43 +106,72 @@
     </div>
   </section>
 
-  <section class="section section--install" id="install">
-    <div class="section__head">
-      <h2>Install</h2>
-      <p>Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
-    </div>
-    <pre class="code" tabindex="0"><code>mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
+  <section class="scene scene--install" id="install">
+    <img class="scene__img" src="assets/flow.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--install"></div>
+    <div class="scene__frame scene__frame--wide">
+      <p class="eyebrow">Begin</p>
+      <h2>Three lines.<br /><em>Then yours.</em></h2>
+      <p class="lede lede--short">Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
+      <pre class="code" tabindex="0"><code>mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 nvim</code></pre>
-    <p class="fine">
-      Omarchy theme symlink notes in the
-      <a href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">README</a>.
-    </p>
+      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">Omarchy theme notes</a>
+    </div>
   </section>
 
-  <section class="section" id="docs">
-    <div class="section__head">
-      <h2>Field notes</h2>
+  <section class="scene scene--notes" id="docs">
+    <img class="scene__img" src="assets/learn.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="scene__shade scene__shade--notes"></div>
+    <div class="scene__frame scene__frame--wide">
+      <p class="eyebrow">Library</p>
+      <h2>Field <em>notes.</em></h2>
+      <ul class="docs">
+        <li>
+          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md">
+            <span>Philosophy</span>
+            <em>why this exists</em>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">
+            <span>Shortcuts</span>
+            <em>full reference</em>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">
+            <span>Learning</span>
+            <em>practice into Vim</em>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md">
+            <span>Credits</span>
+            <em>gratitude upstream</em>
+          </a>
+        </li>
+      </ul>
     </div>
-    <ul class="docs">
-      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md"><span>Philosophy</span><em>why this exists</em></a></li>
-      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md"><span>Shortcuts</span><em>full reference</em></a></li>
-      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md"><span>Learning</span><em>practice into Vim</em></a></li>
-      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md"><span>Credits</span><em>gratitude upstream</em></a></li>
-    </ul>
   </section>
 
   <footer class="footer">
-    <p class="mark mark--sm">LazyVim Config</p>
-    <p>
-      Personal opinionated config — not an invention of Neovim, LazyVim, or the plugins.
-      After you clone it, change anything you want.
-    </p>
-    <p class="footer__meta">
-      <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
-      · <a href="https://omarchy.org/">Omarchy</a>
-      · <a href="https://www.lazyvim.org/">LazyVim</a>
-    </p>
+    <img class="footer__img" src="assets/craft.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <div class="footer__shade"></div>
+    <div class="footer__inner">
+      <p class="mark mark--sm">LazyVim Config</p>
+      <p class="footer__lede">
+        Personal opinionated config — not an invention of Neovim, LazyVim, or the plugins.
+        After you clone it, change anything you want.
+      </p>
+      <p class="footer__meta">
+        <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://omarchy.org/">Omarchy</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.lazyvim.org/">LazyVim</a>
+      </p>
+    </div>
   </footer>
 </body>
 </html>
