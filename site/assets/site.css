@@ -1,13 +1,11 @@
 :root {
   --ink: #07090c;
-  --ink-lift: #10141a;
-  --fog: #e8e4dc;
-  --fog-dim: #9aa194;
-  --phosphor: #b8e986;
-  --phosphor-deep: #7fb85a;
-  --line: rgba(232, 228, 220, 0.12);
+  --ink-lift: #12171f;
+  --fog: #f2efe6;
+  --fog-dim: #b7b6a8;
+  --phosphor: #c6f28a;
+  --line: rgba(242, 239, 230, 0.16);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration: 0.35s;
   --font-display: "Syne", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --pad: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
@@ -37,10 +35,9 @@ a {
   color: var(--phosphor);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
-  transition: color var(--duration) var(--ease), opacity var(--duration) var(--ease);
 }
 
-a:hover { color: #d4f5a8; }
+a:hover { color: #e3ffb0; }
 
 a:focus-visible {
   outline: 2px solid var(--phosphor);
@@ -53,46 +50,48 @@ a:focus-visible {
   padding-inline: var(--pad);
 }
 
-/* —— Hero: one composition —— */
 .hero {
   position: relative;
-  min-height: min(92dvh, 54rem);
+  min-height: min(88dvh, 48rem);
   display: grid;
   align-items: end;
-  isolation: isolate;
   overflow: clip;
+  background: var(--ink);
 }
 
-.hero__bg {
+.hero__media {
   position: absolute;
   inset: 0;
-  background:
-    url("hero.jpg") center / cover no-repeat,
-    radial-gradient(120% 80% at 20% 90%, rgba(184, 233, 134, 0.18), transparent 55%),
-    var(--ink);
-  transform: scale(1.02);
-  animation: drift 18s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.55;
 }
 
 .hero__veil {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(7, 9, 12, 0.35) 0%, rgba(7, 9, 12, 0.55) 42%, rgba(7, 9, 12, 0.92) 78%, var(--ink) 100%),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0, 0, 0, 0.08) 3px,
-      rgba(0, 0, 0, 0.08) 4px
-    );
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 9, 12, 0.25) 0%,
+    rgba(7, 9, 12, 0.45) 40%,
+    rgba(7, 9, 12, 0.88) 72%,
+    var(--ink) 100%
+  );
   pointer-events: none;
 }
 
 .hero__inner {
   position: relative;
-  z-index: 1;
-  padding-block: clamp(4rem, 12vw, 7rem) clamp(2.5rem, 6vw, 4rem);
+  z-index: 2;
+  padding-block: clamp(3.5rem, 10vw, 6rem) clamp(2.25rem, 5vw, 3.5rem);
 }
 
 .brand {
@@ -103,7 +102,6 @@ a:focus-visible {
   text-transform: uppercase;
   color: var(--phosphor);
   margin-bottom: 0.85rem;
-  animation: rise 0.7s var(--ease) 0.05s both;
 }
 
 .headline {
@@ -115,14 +113,12 @@ a:focus-visible {
   color: var(--fog);
   max-width: 12ch;
   margin-bottom: 1.1rem;
-  animation: rise 0.75s var(--ease) 0.12s both;
 }
 
 .lede {
   max-width: 36rem;
   color: var(--fog-dim);
   margin-bottom: 1.75rem;
-  animation: rise 0.75s var(--ease) 0.2s both;
 }
 
 .accent { color: var(--phosphor); }
@@ -131,7 +127,6 @@ a:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 0.75rem;
-  animation: rise 0.75s var(--ease) 0.28s both;
 }
 
 .btn {
@@ -146,22 +141,21 @@ a:focus-visible {
   border-radius: 0;
   border: 1px solid transparent;
   text-decoration: none;
-  transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), transform 0.2s ease;
 }
 
 .btn--primary {
   background: var(--phosphor);
-  color: var(--ink);
+  color: #071008;
   border-color: var(--phosphor);
 }
 
 .btn--primary:hover {
-  background: #d4f5a8;
-  color: var(--ink);
+  background: #e3ffb0;
+  color: #071008;
 }
 
 .btn--ghost {
-  background: transparent;
+  background: rgba(7, 9, 12, 0.55);
   color: var(--fog);
   border-color: var(--line);
 }
@@ -171,9 +165,6 @@ a:focus-visible {
   color: var(--phosphor);
 }
 
-.btn:active { transform: translateY(1px); }
-
-/* —— Sections: one job each —— */
 .section {
   padding-block: clamp(3rem, 8vw, 5.5rem);
   border-top: 1px solid var(--line);
@@ -234,7 +225,6 @@ kbd {
   padding: 1.1rem 1.15rem;
   overflow-x: auto;
   margin-bottom: 1rem;
-  -webkit-overflow-scrolling: touch;
 }
 
 .code code {
@@ -277,25 +267,6 @@ kbd {
 
 .footer__meta a { color: var(--fog-dim); }
 .footer__meta a:hover { color: var(--phosphor); }
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes drift {
-  from { transform: scale(1.02) translate3d(0, 0, 0); }
-  to { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .hero__bg { animation: none; }
-  .brand, .headline, .lede, .cta {
-    opacity: 1;
-    animation: none;
-  }
-}
 
 @media (max-width: 560px) {
   .keys__row {

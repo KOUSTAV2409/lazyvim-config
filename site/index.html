@@ -21,11 +21,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/site.css?v=3" />
+  <style>
+    /* Critical: text must stay visible even if the stylesheet fails or caches */
+    body { background: #07090c; color: #f2efe6; }
+    .brand, .headline, .lede, .cta, .section, .footer { opacity: 1 !important; visibility: visible !important; }
+  </style>
 </head>
 <body>
   <header class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__media" aria-hidden="true">
+      <img src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+    </div>
     <div class="hero__veil" aria-hidden="true"></div>
     <div class="hero__inner wrap">
       <p class="brand">LazyVim Config</p>
