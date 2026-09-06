@@ -162,6 +162,33 @@ Useful examples:
 
 ---
 
+## Web / Emmet / HTML
+
+| Key | Modes | Action |
+|-----|-------|--------|
+| `!` then `Tab` | I (HTML) | Expand HTML5 boilerplate (Emmet) |
+| Emmet abbr then `Tab` | I (HTML markup) | Expand (`div>ul>li*3`, etc.) |
+| `Ctrl+E` | I (HTML) | Emmet expand (backup) |
+| `Alt+W` | N/V/I | Wrap selection / tag with Emmet |
+| `:OtterActivate` | cmd | Force JS/CSS IntelliSense inside HTML |
+
+Inside `<script>` / `<style>`, Emmet HTML junk is filtered so CSS/JS completions win.
+
+---
+
+## Languages (high-value)
+
+| Key | Action |
+|-----|--------|
+| `Space` `D` | Dadbod UI (SQL / SQLite) |
+| `Space` `c` `v` | Python venv selector |
+| `Space` `c` `h` | C/C++ switch source ↔ header (clangd) |
+| `Shift+Alt+F` | Format current buffer (prettier / ruff / stylua / …) |
+
+Full matrix: [LANGUAGES.md](LANGUAGES.md). Fresh machine: [SETUP.md](SETUP.md).
+
+---
+
 ## Splits
 
 | Key | Action |

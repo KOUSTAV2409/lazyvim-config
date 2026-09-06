@@ -2,17 +2,21 @@
 require("config.remote_clipboard").setup()
 
 vim.opt.relativenumber = false
-vim.g.autoformat = false
-vim.opt.mouse = "a" -- Full mouse tracking enabled
-vim.opt.clipboard = "unnamedplus" -- Sync system clipboard immediately
+vim.g.autoformat = false -- format on demand (Shift+Alt+F), like VS Code default
+vim.opt.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
 
 -- VS Code–like editing comfort
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.cursorline = true
-vim.opt.confirm = true -- prompt instead of failing on quit with unsaved buffers
+vim.opt.confirm = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.updatetime = 250 -- faster hover / diagnostics / git blame
+vim.opt.timeoutlen = 300
+vim.opt.pumheight = 12 -- keep suggestion menu compact
+vim.opt.smoothscroll = true
 
 -- Force markdown layout to auto-wrap long text lines naturally
 vim.g.markdown_recommended_style = 0

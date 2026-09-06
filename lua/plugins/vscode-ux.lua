@@ -45,4 +45,15 @@ return {
       end, { desc = "Clear Multi-Cursors" })
     end,
   },
+
+  -- VS Code sticky scroll (context lines while scrolling)
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    optional = true,
+    opts = {
+      max_lines = 3,
+      multiline_threshold = 1,
+      mode = "cursor",
+    },
+  },
 }

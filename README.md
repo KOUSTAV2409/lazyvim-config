@@ -19,8 +19,10 @@ Full opinion: [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
 | Doc | What it is |
 |-----|------------|
+| [docs/SETUP.md](docs/SETUP.md) | **New machine / boot** — clone, theme, Mason, SSoT symlink |
+| [docs/LANGUAGES.md](docs/LANGUAGES.md) | **Out-of-the-box languages** — JS/TS, Python, Ruby/Rails, C/C++, Lua, HTML/CSS/Tailwind, SQLite, … |
 | [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) | Why this setup exists (opinionated) |
-| [docs/SHORTCUTS.md](docs/SHORTCUTS.md) | Full shortcut reference (VS Code layer + important Vim) |
+| [docs/SHORTCUTS.md](docs/SHORTCUTS.md) | Full shortcut reference (VS Code layer + Emmet + Vim) |
 | [docs/LEARNING.md](docs/LEARNING.md) | How to learn this config — practice path |
 | [docs/TERMINAL.md](docs/TERMINAL.md) | Foot / terminal notes (Ctrl+Shift chords) |
 | [docs/CREDITS.md](docs/CREDITS.md) | Gratitude to open source — this is config, not my invention |
@@ -29,74 +31,86 @@ Full opinion: [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 Full machine backup (Hyprland, Foot, Omarchy themes, …):  
 https://github.com/KOUSTAV2409/dotfiles *(private)*
 
-## Install
+## Install (portable)
 
-Requires Neovim **0.11+** (LazyVim 8).
+Requires Neovim **0.11+** (LazyVim extras schema 8).
 
 ```bash
-# backup any existing config
 mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
-
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
-nvim
-```
 
-First launch installs plugins (needs network). Wait until Lazy finishes.
-
-### Theme (Omarchy)
-
-On Omarchy, `lua/plugins/theme.lua` is a symlink to the active theme:
-
-```bash
+# Omarchy theme symlink (required on Omarchy)
 ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
   ~/.config/nvim/lua/plugins/theme.lua
+
+# Other distros: cp ~/.config/nvim/lua/plugins/theme.lua.example \
+#                  ~/.config/nvim/lua/plugins/theme.lua
+
+nvim   # first launch: Lazy + Mason (needs network)
 ```
+
+**Detailed steps, symlink-as-SSoT, and smoke tests:** [docs/SETUP.md](docs/SETUP.md).
 
 ### Theme (any other system)
 
-Replace the symlink with a normal colorscheme plugin, for example create `lua/plugins/theme.lua`:
-
-```lua
-return {
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
-    },
-  },
-}
-```
-
-Shortcuts and behavior do **not** depend on Omarchy — only the theme hot-reload does.
+Use `lua/plugins/theme.lua.example` (tokyonight) or any LazyVim colorscheme. Shortcuts do **not** depend on Omarchy — only theme hot-reload does.
 
 ## What you get immediately
 
+### Editor UX
 - VS Code–familiar keys: save, tabs, explorer, quick open, palette, LSP, multi-cursor, terminal panel  
 - Prefer **`/`** for find (Ctrl+F just starts `/`)  
-- **Ctrl+Shift+H** → replace in current file (replace / replace-all UI)  
+- **Ctrl+Shift+H** → replace in current file  
 - LazyVim defaults still work: press **`Space`** and wait for which-key  
+- Format **on demand** (Shift+Alt+F) — not on every save  
 
-Read [docs/SHORTCUTS.md](docs/SHORTCUTS.md) for the full table.  
-Read [docs/LEARNING.md](docs/LEARNING.md) to learn Vim the way this config expects.
+### Languages (god-tier generalist)
+
+| Stack | Ready via |
+|-------|-----------|
+| JS / TS | `lang.typescript` (vtsls) + `javascript.lua` |
+| HTML / CSS / Emmet / JS-in-HTML | `web.lua` (html-lsp, cssls, emmet, otter) |
+| Tailwind | `lang.tailwind` + hipatterns |
+| Python | `lang.python` (pyright + ruff) |
+| Ruby / Rails / ERB | `lang.ruby` |
+| C / C++ (+ CMake) | `lang.clangd` + `lang.cmake` |
+| Rust | `lang.rust` (needs `rustup` on the OS) |
+| Lua | core LazyVim (`lua_ls` + stylua) |
+| SQL / SQLite | `lang.sql` + sqlite dialect in `languages.lua` |
+| Docker / YAML / TOML / Markdown / JSON | matching `lang.*` extras |
+| DAP + tests + shell/dotfiles + HTTP client | `dap.*`, `test.core`, `util.dot`, `util.rest` |
+
+Full matrix and keys: [docs/LANGUAGES.md](docs/LANGUAGES.md).
 
 ## Layout
 
 ```text
+lazyvim.json                        LazyVim extras (languages + DX)
+lazy-lock.json                      Pinned plugin commits
 lua/config/keymaps.lua              VS Code–familiar maps + replace
-lua/config/options.lua              comfort options
-lua/plugins/vscode-ux.lua           mini.move + multicursor
+lua/config/options.lua              comfort options (no format-on-save)
+lua/plugins/web.lua                 HTML/CSS/Emmet/otter (global)
+lua/plugins/javascript.lua          standalone JS/TS DX
+lua/plugins/languages.lua           treesitter + mason + sqlfluff sqlite
+lua/plugins/vscode-ux.lua           mini.move + multicursor + sticky scroll
 lua/plugins/snacks-*.lua            bottom / floating terminal
 lua/plugins/theme.lua               colorscheme (Omarchy symlink)
+lua/plugins/theme.lua.example       non-Omarchy starter theme
 lua/plugins/omarchy-theme-hotreload.lua
+docs/SETUP.md                       new machine bootstrap
+docs/LANGUAGES.md                   language matrix
 docs/                               philosophy, shortcuts, learning, credits
 docs/journal/                       personal Vim notes
+site/                               GitHub Pages landing
 ```
+
+## Keeping machines in sync
+
+1. Edit **one** clone (recommended: `~/Projects/lazyvim-config` with `~/.config/nvim` → symlink).  
+2. `git commit` && `git push`.  
+3. On the other machine: `git pull` && restart `nvim`.  
+
+Do not maintain two divergent clones. See [docs/SETUP.md](docs/SETUP.md).
 
 ## Credits & gratitude
 
@@ -115,7 +129,7 @@ In particular (non-exhaustive — LazyVim pulls in many more):
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin management |
 | [Omarchy](https://omarchy.org/) / DHH & contributors | The Linux environment this config grew up in |
 | Treesitter, LSP, Mason, and every language server | Intelligence without an Electron IDE |
-| mini.nvim, multicursor.nvim, grug-far, Neo-tree, and other plugins used here | Small sharp tools |
+| otter.nvim, emmet-vim, mini.nvim, multicursor.nvim, grug-far, Neo-tree | Web DX and sharp tools |
 | Foot and other terminal projects | Making Ctrl chords reach the editor |
 | Vim’s lineage and tutors | Motions that still teach people decades later |
 

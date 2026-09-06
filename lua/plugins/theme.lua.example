@@ -1,0 +1,19 @@
+-- Non-Omarchy theme starter.
+-- Usage:
+--   cp lua/plugins/theme.lua.example lua/plugins/theme.lua
+-- Then pick any colorscheme LazyVim supports.
+
+return {
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight",
+    },
+  },
+}
