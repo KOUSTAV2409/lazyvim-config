@@ -2,6 +2,8 @@
 
 Personal [LazyVim](https://www.lazyvim.org/) config used on [Omarchy](https://omarchy.org/) Linux.
 
+**Site:** [koustav2409.github.io/lazyvim-config](https://koustav2409.github.io/lazyvim-config/)
+
 **I did not create these tools.** This is only my personal collection of opinionated config files — a start. The credit belongs to the open source community (Neovim, LazyVim, plugins, Omarchy, and everyone upstream). See [docs/CREDITS.md](docs/CREDITS.md). After you clone it, **change anything you want.**
 
 ## Who this is for
