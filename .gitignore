@@ -9,3 +9,6 @@ data
 *.bak*
 *.bak.*
 .DS_Store
+
+# Machine-local colorscheme (Omarchy symlink or copied example)
+lua/plugins/theme.lua

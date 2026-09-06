@@ -33,23 +33,26 @@ https://github.com/KOUSTAV2409/dotfiles *(private)*
 
 ## Install (portable)
 
-Requires Neovim **0.11+** (LazyVim extras schema 8).
+Requires Neovim **0.11+** (LazyVim extras schema 8). On **0.12+**, restart servers with `:lsp restart` (not `:LspRestart`).
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 
-# Omarchy theme symlink (required on Omarchy)
+# theme.lua is gitignored — create it after clone
+# Omarchy:
 ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
   ~/.config/nvim/lua/plugins/theme.lua
-
-# Other distros: cp ~/.config/nvim/lua/plugins/theme.lua.example \
-#                  ~/.config/nvim/lua/plugins/theme.lua
+# Other distros:
+# cp ~/.config/nvim/lua/plugins/theme.lua.example \
+#    ~/.config/nvim/lua/plugins/theme.lua
 
 nvim   # first launch: Lazy + Mason (needs network)
 ```
 
-**Detailed steps, symlink-as-SSoT, and smoke tests:** [docs/SETUP.md](docs/SETUP.md).
+Or: `./scripts/install.sh` (backup + clone + theme).
+
+**Detailed steps, SSoT symlink, smoke tests, troubleshooting:** [docs/SETUP.md](docs/SETUP.md).
 
 ### Theme (any other system)
 
@@ -94,13 +97,14 @@ lua/plugins/javascript.lua          standalone JS/TS DX
 lua/plugins/languages.lua           treesitter + mason + sqlfluff sqlite
 lua/plugins/vscode-ux.lua           mini.move + multicursor + sticky scroll
 lua/plugins/snacks-*.lua            bottom / floating terminal
-lua/plugins/theme.lua               colorscheme (Omarchy symlink)
+lua/plugins/theme.lua               local only (gitignored) — Omarchy symlink or example
 lua/plugins/theme.lua.example       non-Omarchy starter theme
 lua/plugins/omarchy-theme-hotreload.lua
-docs/SETUP.md                       new machine bootstrap
+docs/SETUP.md                       new machine bootstrap + troubleshooting
 docs/LANGUAGES.md                   language matrix
 docs/                               philosophy, shortcuts, learning, credits
 docs/journal/                       personal Vim notes
+scripts/install.sh                  one-shot clone + theme setup
 site/                               GitHub Pages landing
 ```
 

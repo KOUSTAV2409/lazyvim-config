@@ -76,6 +76,7 @@ return {
         "ruff",
         -- ruby / rails views
         "ruby-lsp",
+        "rubocop",
         "erb-formatter",
         "erb-lint",
         -- c / c++
@@ -83,13 +84,16 @@ return {
         "codelldb",
         -- sql
         "sqlfluff",
+        -- docker (lang.docker extra)
+        "dockerfile-language-server",
+        "docker-compose-language-service",
+        "hadolint",
         -- shell / config
         "shellcheck",
         "shfmt",
         "yaml-language-server",
         "taplo",
         "marksman",
-        "dockerfile-language-server",
       },
     },
   },

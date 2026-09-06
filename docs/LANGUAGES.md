@@ -109,6 +109,8 @@ vim.g.dbs = {
 
 See `lua/plugins/languages.lua` and `lua/plugins/web.lua` `ensure_installed` lists. First launch may take several minutes.
 
+Includes (non-exhaustive): html/css/emmet, prettier, eslint, vtsls, pyright, ruff, ruby-lsp, **rubocop**, erb tools, clangd, codelldb, sqlfluff, dockerfile + compose LS, **hadolint**, shellcheck, shfmt, yamlls, taplo, marksman.
+
 Rust-analyzer is **not** Mason-first — install via `rustup component add rust-analyzer`.
 
 ---

@@ -6,10 +6,12 @@ Goal: on a new Linux boot or laptop, clone this repo and get the **same** LazyVi
 
 | Tool | Why |
 |------|-----|
-| Neovim **0.11+** | LazyVim 8 / current LazyVim |
+| Neovim **0.11+** (0.12+ fine) | LazyVim 8 / current LazyVim |
 | `git`, `curl`, network | clone + Mason installs |
 | A C compiler (optional) | treesitter parsers |
-| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby`, `rustup`, `clang`, `sqlite` CLI for projects — Mason installs **editors tools**, not always the language itself |
+| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby`, `rustup`, `clang`, `sqlite` CLI for projects — Mason installs **editor tools**, not always the language itself |
+
+`lua/plugins/theme.lua` is **not** in the repo (gitignored). You create it after clone (Omarchy symlink or copy `theme.lua.example`).
 
 ### Omarchy (this config’s home)
 
@@ -29,7 +31,7 @@ mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null   # optional: wipe ol
 # 2) Clone THIS repo as your Neovim config
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 
-# 3) Theme
+# 3) Theme (required — not shipped in git)
 # Omarchy:
 ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
   ~/.config/nvim/lua/plugins/theme.lua
@@ -40,6 +42,8 @@ ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
 # 4) Launch once (needs network) — Lazy + Mason install everything
 nvim
 ```
+
+Or run `./scripts/install.sh` from a clone (backs up, clones into `~/.config/nvim`, creates theme).
 
 Wait until Lazy finishes. Open `:Mason` and confirm tools are installed (or just open a `.py` / `.rs` / `.html` file and let servers install).
 
@@ -100,6 +104,16 @@ nvim                 # let Lazy sync; :Lazy sync if needed
 ## Dual-clone warning
 
 Do **not** keep two divergent copies (`~/.config/nvim` and `~/Projects/lazyvim-config`) both with their own `.git` and different commits. Pick **one** SSoT and symlink the other path.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Huge diagnostic counts on a tiny/fixed file | Stale LSP cascade — run **`:lsp restart`** (Neovim **0.12+**). On 0.11.x use `:LspRestart`. Or `:bd` and reopen the file. |
+| `E492: Not an editor command: LspRestart` | You’re on Neovim 0.12+ — use **`:lsp restart`** instead. |
+| Ruby `Invalid byte sequence in utf-8` but file looks fine | Buffer has bad bytes; disk may be clean. **`:e!`** to reload, or rewrite/save as UTF-8 (`:set fileencoding=utf-8`). |
+| No colorscheme / theme errors | Create `lua/plugins/theme.lua` (symlink or copy example) — it is not in git. |
+| Mason still installing / packages aborted | Quit all Neovim instances, reopen once, wait for Mason to finish. |
 
 ## Related docs
 

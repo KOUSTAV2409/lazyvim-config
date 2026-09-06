@@ -189,6 +189,17 @@ Full matrix: [LANGUAGES.md](LANGUAGES.md). Fresh machine: [SETUP.md](SETUP.md).
 
 ---
 
+## LSP commands (Neovim version)
+
+| Neovim | Restart language servers |
+|--------|--------------------------|
+| **0.12+** | `:lsp restart` |
+| **0.11.x** | `:LspRestart` |
+
+Also useful: `:LspInfo` (alias for `:checkhealth vim.lsp`), `:Mason`.
+
+---
+
 ## Splits
 
 | Key | Action |
