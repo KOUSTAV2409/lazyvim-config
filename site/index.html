@@ -3,119 +3,144 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#07090c" />
+  <meta name="theme-color" content="#050608" />
   <meta name="color-scheme" content="dark" />
-  <title>LazyVim Config · VS Code muscle memory, Neovim weight</title>
-  <meta name="description" content="Opinionated Omarchy LazyVim config. Keep Ctrl+C / Ctrl+V / Ctrl+S. Learn real Vim and Space when you are ready. Lightweight Neovim, not another Electron IDE." />
+  <title>LazyVim Config · keep your editor intuition</title>
+  <meta name="description" content="An opinionated LazyVim setup with VS Code muscle memory, grown on Omarchy. Keep Ctrl+C. Learn Vim when you are ready." />
   <meta property="og:title" content="LazyVim Config · keep your editor intuition" />
-  <meta property="og:description" content="VS Code–friendly keys on LazyVim. Growth path into Vim and leader, without throwing away what you already know." />
+  <meta property="og:description" content="VS Code–friendly keys on LazyVim. Inspiration first. Vim as a growth path." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://koustav2409.github.io/lazyvim-config/" />
   <meta property="og:image" content="https://koustav2409.github.io/lazyvim-config/assets/hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LazyVim Config · keep your editor intuition" />
-  <meta name="twitter:description" content="VS Code–friendly keys on LazyVim for Omarchy. Vim is a growth path, not a gate." />
+  <meta name="twitter:description" content="VS Code–friendly keys on LazyVim. Inspiration first. Vim as a growth path." />
   <meta name="twitter:image" content="https://koustav2409.github.io/lazyvim-config/assets/hero.jpg" />
   <link rel="canonical" href="https://koustav2409.github.io/lazyvim-config/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css?v=3" />
-  <style>
-    /* Critical: text must stay visible even if the stylesheet fails or caches */
-    body { background: #07090c; color: #f2efe6; }
-    .brand, .headline, .lede, .cta, .section, .footer { opacity: 1 !important; visibility: visible !important; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css?v=4" />
 </head>
 <body>
-  <header class="hero">
-    <div class="hero__media" aria-hidden="true">
-      <img src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+  <nav class="top">
+    <a class="mark" href="#">LazyVim Config</a>
+    <div class="top__links">
+      <a href="#keys">Keys</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
     </div>
-    <div class="hero__veil" aria-hidden="true"></div>
-    <div class="hero__inner wrap">
-      <p class="brand">LazyVim Config</p>
-      <h1 class="headline">Keep Ctrl+C.<br />Gain Vim later.</h1>
+  </nav>
+
+  <header class="hero">
+    <img class="hero__img" src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+    <div class="hero__shade"></div>
+    <div class="hero__copy">
+      <p class="eyebrow">Omarchy · LazyVim · personal config</p>
+      <h1>Keep the keys<br /><em>you already love.</em></h1>
       <p class="lede">
-        Opinionated LazyVim for people who already know normal editors.
-        Universal shortcuts first. Neovim weight. <span class="accent">Space</span> when you are ready.
+        A lighter editor without throwing away lifelong muscle memory.
+        Vim and <span class="glow">Space</span> wait as a growth path — not a gate.
       </p>
       <div class="cta">
-        <a class="btn btn--primary" href="#install">Install</a>
-        <a class="btn btn--ghost" href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
-        <a class="btn btn--ghost" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">Shortcuts</a>
+        <a class="pill pill--solid" href="#install">Begin</a>
+        <a class="pill" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md">Philosophy</a>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="section wrap" id="for">
-      <h2>Who this is for</h2>
-      <p class="section__text">
-        You already have lifelong muscle memory: copy, paste, undo, save, find, tabs, explorer.
-        Brand-new Vim often says forget all of that. This config asks a different question:
-        <em>why should we have to?</em>
+  <section class="band">
+    <div class="band__visual">
+      <img src="assets/learn.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    </div>
+    <div class="band__text">
+      <h2>For people who already edit.</h2>
+      <p>
+        Ctrl+C, Ctrl+V, Ctrl+Z, Ctrl+S, Ctrl+F — that intuition is not wrong.
+        This config keeps it first-class, then invites real Vim when <em>you</em> are ready.
       </p>
-    </section>
+      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Read the learning path →</a>
+    </div>
+  </section>
 
-    <section class="section wrap" id="keys">
-      <h2>Day one feels like an editor</h2>
-      <p class="section__text">
-        The familiar layer is first-class. LazyVim and real Vim stay available underneath.
-      </p>
-      <div class="keys" role="list">
-        <div class="keys__row" role="listitem"><kbd>Ctrl+S</kbd><span>Save</span></div>
-        <div class="keys__row" role="listitem"><kbd>Ctrl+P</kbd><span>Quick open</span></div>
-        <div class="keys__row" role="listitem"><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></div>
-        <div class="keys__row" role="listitem"><kbd>Ctrl+B</kbd><span>Explorer</span></div>
-        <div class="keys__row" role="listitem"><kbd>/</kbd><span>Find (Ctrl+F starts it)</span></div>
-        <div class="keys__row" role="listitem"><kbd>Space</kbd><span>LazyVim which-key</span></div>
-      </div>
-      <p class="fine">
-        Full table in
-        <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">SHORTCUTS.md</a>.
-        Learning path in
-        <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">LEARNING.md</a>.
-      </p>
-    </section>
+  <section class="gallery-quote">
+    <img src="assets/flow.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <blockquote>
+      <p>Why should a faster tool demand a personality transplant?</p>
+      <cite>Your lifelong editor intuition first. Vim speed second. Low RAM always.</cite>
+    </blockquote>
+  </section>
 
-    <section class="section wrap" id="install">
+  <section class="section" id="keys">
+    <div class="section__head">
+      <h2>Day-one keys</h2>
+      <p>Familiar chords on day one. LazyVim which-key still lives under Space.</p>
+    </div>
+    <ul class="keygrid">
+      <li><kbd>Ctrl+S</kbd><span>Save</span></li>
+      <li><kbd>Ctrl+P</kbd><span>Quick open</span></li>
+      <li><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></li>
+      <li><kbd>Ctrl+B</kbd><span>Explorer</span></li>
+      <li><kbd>/</kbd><span>Find</span></li>
+      <li><kbd>Space</kbd><span>Leader · which-key</span></li>
+    </ul>
+    <p class="fine">
+      Full table in
+      <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">SHORTCUTS.md</a>.
+    </p>
+  </section>
+
+  <section class="band band--reverse" id="craft">
+    <div class="band__visual">
+      <img src="assets/craft.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    </div>
+    <div class="band__text">
+      <h2>Craft over chrome.</h2>
+      <p>
+        Neovim weight instead of another Electron IDE.
+        Grown on Omarchy; theme hot-reload is optional.
+        Shortcuts work anywhere Neovim 0.11+ runs.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--install" id="install">
+    <div class="section__head">
       <h2>Install</h2>
-      <p class="section__text">Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
-      <pre class="code" tabindex="0"><code># backup any existing config
-mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
-
+      <p>Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
+    </div>
+    <pre class="code" tabindex="0"><code>mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 nvim</code></pre>
-      <p class="fine">
-        On Omarchy, symlink the live theme after clone
-        (<a href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">README</a>).
-        Shortcuts work without Omarchy; only theme hot-reload needs it.
-      </p>
-    </section>
+    <p class="fine">
+      Omarchy theme symlink notes in the
+      <a href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">README</a>.
+    </p>
+  </section>
 
-    <section class="section wrap" id="docs">
-      <h2>Read the opinions</h2>
-      <ul class="docs">
-        <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md">Philosophy</a> — why this exists</li>
-        <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">Shortcuts</a> — full reference</li>
-        <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Learning</a> — practice path into Vim</li>
-        <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md">Credits</a> — gratitude upstream</li>
-      </ul>
-    </section>
-  </main>
+  <section class="section" id="docs">
+    <div class="section__head">
+      <h2>Field notes</h2>
+    </div>
+    <ul class="docs">
+      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md"><span>Philosophy</span><em>why this exists</em></a></li>
+      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md"><span>Shortcuts</span><em>full reference</em></a></li>
+      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md"><span>Learning</span><em>practice into Vim</em></a></li>
+      <li><a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md"><span>Credits</span><em>gratitude upstream</em></a></li>
+    </ul>
+  </section>
 
-  <footer class="footer wrap">
+  <footer class="footer">
+    <p class="mark mark--sm">LazyVim Config</p>
     <p>
       Personal opinionated config — not an invention of Neovim, LazyVim, or the plugins.
-      Credit belongs to the open source community.
-      Change anything you want after you clone.
+      After you clone it, change anything you want.
     </p>
     <p class="footer__meta">
-      <a href="https://github.com/KOUSTAV2409/lazyvim-config">github.com/KOUSTAV2409/lazyvim-config</a>
-      · grown on <a href="https://omarchy.org/">Omarchy</a>
-      · built with <a href="https://www.lazyvim.org/">LazyVim</a>
+      <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
+      · <a href="https://omarchy.org/">Omarchy</a>
+      · <a href="https://www.lazyvim.org/">LazyVim</a>
     </p>
   </footer>
 </body>
