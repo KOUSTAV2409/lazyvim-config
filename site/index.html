@@ -21,12 +21,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css?v=6" />
+  <link rel="stylesheet" href="assets/site.css?v=7" />
 </head>
 <body>
   <nav class="top">
     <a class="mark" href="#">LazyVim Config</a>
     <div class="top__links">
+      <a href="#why">Why</a>
       <a href="#keys">Keys</a>
       <a href="#install">Install</a>
       <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
@@ -36,10 +37,10 @@
   <header class="hero">
     <img class="hero__img" src="assets/hero.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
     <div class="hero__shade"></div>
-    <div class="hero__copy">
+    <div class="shell hero__copy">
       <p class="eyebrow">Omarchy · LazyVim · personal config</p>
       <h1>Keep the keys<br /><em>you already love.</em></h1>
-      <p class="lede">
+      <p class="prose">
         A lighter editor without throwing away lifelong muscle memory.
         Vim and <span class="glow">Space</span> wait as a growth path — not a gate.
       </p>
@@ -50,106 +51,122 @@
     </div>
   </header>
 
-  <main class="after">
+  <main>
     <section class="block" id="why">
-      <p class="eyebrow">Intuition</p>
-      <h2>For people who already edit.</h2>
-      <p class="prose">
-        Ctrl+C, Ctrl+V, Ctrl+Z, Ctrl+S, Ctrl+F — that intuition is not wrong.
-        This config keeps it first-class, then invites real Vim when <em>you</em> are ready.
-      </p>
-      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Read the learning path</a>
+      <div class="shell">
+        <p class="eyebrow">Intuition</p>
+        <h2>For people who<br /><em>already edit.</em></h2>
+        <p class="prose">
+          Ctrl+C, Ctrl+V, Ctrl+Z, Ctrl+S, Ctrl+F — that intuition is not wrong.
+          This config keeps it first-class, then invites real Vim when <em>you</em> are ready.
+        </p>
+        <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">Read the learning path</a>
+      </div>
     </section>
 
-    <section class="block block--quote" aria-label="Philosophy">
-      <blockquote>
-        <p>Why should a faster tool demand a personality transplant?</p>
-        <cite>Lifelong editor intuition first · Vim speed second · Low RAM always</cite>
-      </blockquote>
+    <section class="block" id="belief">
+      <div class="shell">
+        <p class="eyebrow">Belief</p>
+        <h2>Faster should not<br /><em>mean foreign.</em></h2>
+        <p class="prose prose--quote">
+          Why should a faster tool demand a personality transplant?
+        </p>
+        <p class="note">Lifelong editor intuition first · Vim speed second · Low RAM always</p>
+      </div>
     </section>
 
     <section class="block" id="keys">
-      <p class="eyebrow">Day one</p>
-      <h2>Familiar chords.<br /><em>No ceremony.</em></h2>
-      <p class="prose prose--short">LazyVim which-key still lives under Space when you want to grow.</p>
-      <ul class="keygrid">
-        <li><kbd>Ctrl+S</kbd><span>Save</span></li>
-        <li><kbd>Ctrl+P</kbd><span>Quick open</span></li>
-        <li><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></li>
-        <li><kbd>Ctrl+B</kbd><span>Explorer</span></li>
-        <li><kbd>/</kbd><span>Find</span></li>
-        <li><kbd>Space</kbd><span>Leader · which-key</span></li>
-      </ul>
-      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">Full shortcuts</a>
+      <div class="shell">
+        <p class="eyebrow">Day one</p>
+        <h2>Familiar chords.<br /><em>No ceremony.</em></h2>
+        <p class="prose">LazyVim which-key still lives under Space when you want to grow.</p>
+        <ul class="keygrid">
+          <li><kbd>Ctrl+S</kbd><span>Save</span></li>
+          <li><kbd>Ctrl+P</kbd><span>Quick open</span></li>
+          <li><kbd>Ctrl+Shift+P</kbd><span>Command palette</span></li>
+          <li><kbd>Ctrl+B</kbd><span>Explorer</span></li>
+          <li><kbd>/</kbd><span>Find</span></li>
+          <li><kbd>Space</kbd><span>Leader · which-key</span></li>
+        </ul>
+        <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">Full shortcuts</a>
+      </div>
     </section>
 
-    <section class="block block--split" id="craft">
-      <div>
+    <section class="block" id="craft">
+      <div class="shell">
         <p class="eyebrow">Weight</p>
         <h2>Craft over<br /><em>chrome.</em></h2>
+        <p class="prose">
+          Neovim weight instead of another Electron IDE.
+          Grown on Omarchy; theme hot-reload is optional.
+          Shortcuts work anywhere Neovim 0.11+ runs.
+        </p>
       </div>
-      <p class="prose">
-        Neovim weight instead of another Electron IDE.
-        Grown on Omarchy; theme hot-reload is optional.
-        Shortcuts work anywhere Neovim 0.11+ runs.
-      </p>
     </section>
 
     <section class="block" id="install">
-      <p class="eyebrow">Begin</p>
-      <h2>Three lines.<br /><em>Then yours.</em></h2>
-      <p class="prose prose--short">Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
-      <pre class="code" tabindex="0"><code>mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
+      <div class="shell">
+        <p class="eyebrow">Begin</p>
+        <h2>Three lines.<br /><em>Then yours.</em></h2>
+        <p class="prose">Requires Neovim 0.11+ (LazyVim 8). First launch needs network for plugins.</p>
+        <pre class="code" tabindex="0"><code>mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 nvim</code></pre>
-      <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">Omarchy theme notes</a>
+        <a class="textlink" href="https://github.com/KOUSTAV2409/lazyvim-config#theme-omarchy">Omarchy theme notes</a>
+      </div>
     </section>
 
     <section class="block" id="docs">
-      <p class="eyebrow">Library</p>
-      <h2>Field <em>notes.</em></h2>
-      <ul class="docs">
-        <li>
-          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md">
-            <span>Philosophy</span>
-            <em>why this exists</em>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">
-            <span>Shortcuts</span>
-            <em>full reference</em>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">
-            <span>Learning</span>
-            <em>practice into Vim</em>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md">
-            <span>Credits</span>
-            <em>gratitude upstream</em>
-          </a>
-        </li>
-      </ul>
+      <div class="shell">
+        <p class="eyebrow">Library</p>
+        <h2>Field<br /><em>notes.</em></h2>
+        <p class="prose">Short reads if you want the why, the map, or the gratitude.</p>
+        <ul class="docs">
+          <li>
+            <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/PHILOSOPHY.md">
+              <span>Philosophy</span>
+              <em>why this exists</em>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/SHORTCUTS.md">
+              <span>Shortcuts</span>
+              <em>full reference</em>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/LEARNING.md">
+              <span>Learning</span>
+              <em>practice into Vim</em>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/KOUSTAV2409/lazyvim-config/blob/main/docs/CREDITS.md">
+              <span>Credits</span>
+              <em>gratitude upstream</em>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p class="mark mark--sm">LazyVim Config</p>
-    <p class="footer__lede">
-      Personal opinionated config — not an invention of Neovim, LazyVim, or the plugins.
-      After you clone it, change anything you want.
-    </p>
-    <p class="footer__meta">
-      <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://omarchy.org/">Omarchy</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.lazyvim.org/">LazyVim</a>
-    </p>
+  <footer class="block footer">
+    <div class="shell">
+      <p class="eyebrow">Close</p>
+      <p class="mark mark--sm">LazyVim Config</p>
+      <p class="prose">
+        Personal opinionated config — not an invention of Neovim, LazyVim, or the plugins.
+        After you clone it, change anything you want.
+      </p>
+      <p class="footer__meta">
+        <a href="https://github.com/KOUSTAV2409/lazyvim-config">GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://omarchy.org/">Omarchy</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.lazyvim.org/">LazyVim</a>
+      </p>
+    </div>
   </footer>
 </body>
 </html>
