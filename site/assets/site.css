@@ -6,7 +6,8 @@
   --phosphor: #b8e986;
   --phosphor-deep: #7fb85a;
   --line: rgba(232, 228, 220, 0.12);
-  --ease: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.35s;
   --font-display: "Syne", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --pad: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
@@ -36,7 +37,7 @@ a {
   color: var(--phosphor);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
-  transition: color var(--ease), opacity var(--ease);
+  transition: color var(--duration) var(--ease), opacity var(--duration) var(--ease);
 }
 
 a:hover { color: #d4f5a8; }
@@ -102,8 +103,7 @@ a:focus-visible {
   text-transform: uppercase;
   color: var(--phosphor);
   margin-bottom: 0.85rem;
-  opacity: 0;
-  animation: rise 0.7s var(--ease) 0.05s forwards;
+  animation: rise 0.7s var(--ease) 0.05s both;
 }
 
 .headline {
@@ -115,16 +115,14 @@ a:focus-visible {
   color: var(--fog);
   max-width: 12ch;
   margin-bottom: 1.1rem;
-  opacity: 0;
-  animation: rise 0.75s var(--ease) 0.12s forwards;
+  animation: rise 0.75s var(--ease) 0.12s both;
 }
 
 .lede {
   max-width: 36rem;
   color: var(--fog-dim);
   margin-bottom: 1.75rem;
-  opacity: 0;
-  animation: rise 0.75s var(--ease) 0.2s forwards;
+  animation: rise 0.75s var(--ease) 0.2s both;
 }
 
 .accent { color: var(--phosphor); }
@@ -133,8 +131,7 @@ a:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 0.75rem;
-  opacity: 0;
-  animation: rise 0.75s var(--ease) 0.28s forwards;
+  animation: rise 0.75s var(--ease) 0.28s both;
 }
 
 .btn {
@@ -149,7 +146,7 @@ a:focus-visible {
   border-radius: 0;
   border: 1px solid transparent;
   text-decoration: none;
-  transition: background var(--ease), color var(--ease), border-color var(--ease), transform 0.2s ease;
+  transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), transform 0.2s ease;
 }
 
 .btn--primary {
