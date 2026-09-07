@@ -252,7 +252,10 @@ return {
           return
         end
         -- JS only: html-lsp already covers embedded CSS
-        local ok = pcall(otter.activate, { "javascript" }, true, true)
+        local ok = false
+        vim.api.nvim_buf_call(bufnr, function()
+          ok = pcall(otter.activate, { "javascript" }, true, true)
+        end)
         if ok then
           activated[bufnr] = true
         end

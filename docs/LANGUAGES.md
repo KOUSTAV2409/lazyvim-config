@@ -73,6 +73,8 @@ Optional project markers: `pyproject.toml`, `requirements.txt`, … (prefer thes
 
 - Extra: `lang.ruby` (there is **no** separate Rails extra)  
 - `ruby_lsp` for intelligence; **rubocop runs as formatter only** (not a second LSP) — see `lua/plugins/ruby.lua`  
+- Prefer **`gem install ruby-lsp`** on your mise/PATH Ruby (Mason’s wrapper uses system `/usr/bin/ruby` and often breaks)  
+- Real apps: open a folder with a `Gemfile` (best DX). Scratch `.rb` files use a composed `.ruby-lsp` bundle on first launch  
 - ERB: `erb-formatter`, `erb-lint` via Mason  
 - Pair with `lang.sql`, `lang.tailwind`, prettier for full-stack Rails apps  
 

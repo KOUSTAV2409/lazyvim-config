@@ -9,7 +9,7 @@ Goal: on a new Linux boot or laptop, clone this repo and get the **same** LazyVi
 | Neovim **0.11+** (0.12+ fine) | LazyVim 8 / current LazyVim |
 | `git`, `curl`, network | clone + Mason installs |
 | A C compiler (optional) | treesitter parsers |
-| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby`, `rustup`, `clang`, `sqlite` CLI for projects — Mason installs **editor tools**, not always the language itself |
+| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby` + `gem install ruby-lsp`, `rustup`, `clang`, `sqlite` CLI for projects — Mason installs **editor tools**, not always the language itself |
 
 `lua/plugins/theme.lua` is **not** in the repo (gitignored). You create it after clone (Omarchy symlink or copy `theme.lua.example`).
 
@@ -111,6 +111,7 @@ Do **not** keep two divergent copies (`~/.config/nvim` and `~/Projects/lazyvim-c
 |---------|-----|
 | Huge diagnostic counts on a tiny/fixed file | Stale LSP cascade — run **`:lsp restart`** (Neovim **0.12+**). On 0.11.x use `:LspRestart`. Or `:bd` and reopen the file. |
 | Pyright / vtsls “loading” on every keystroke | Fixed via `lsp-perf.lua` + language tunings. Restart Neovim after pull. Prefer real project roots (`pyproject.toml`, `package.json`, …). |
+| Ruby `cannot load such file -- bundler` / ruby_lsp quits | Run `gem install ruby-lsp` (mise/PATH Ruby). Config prefers that binary over Mason’s system-ruby wrapper. For apps, use a `Gemfile`. Then `:lsp restart`. |
 | Want full clangd index / tidy | Uncomment flags in `lua/plugins/clangd.lua` |
 | `E492: Not an editor command: LspRestart` | You’re on Neovim 0.12+ — use **`:lsp restart`** instead. |
 | Ruby `Invalid byte sequence in utf-8` but file looks fine | Buffer has bad bytes; disk may be clean. **`:e!`** to reload, or rewrite/save as UTF-8 (`:set fileencoding=utf-8`). |
