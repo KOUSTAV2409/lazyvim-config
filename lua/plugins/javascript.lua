@@ -34,6 +34,7 @@ return {
       servers = {
         vtsls = {
           single_file_support = true,
+          flags = { debounce_text_changes = 500 },
           settings = {
             javascript = {
               suggest = {
@@ -42,12 +43,39 @@ return {
               },
               format = { enable = false }, -- prettier via LazyVim extra
               updateImportsOnFileMove = { enabled = "always" },
+              -- Quiet typing cost; toggle LazyVim <leader>uh if you want inlays back
+              inlayHints = {
+                parameterNames = { enabled = "none" },
+                parameterTypes = { enabled = false },
+                variableTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                enumMemberValues = { enabled = false },
+              },
+              tsserver = { maxTsServerMemory = 2048 },
             },
             typescript = {
               suggest = { completeFunctionCalls = true },
               format = { enable = false },
               updateImportsOnFileMove = { enabled = "always" },
+              inlayHints = {
+                parameterNames = { enabled = "none" },
+                parameterTypes = { enabled = false },
+                variableTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                enumMemberValues = { enabled = false },
+              },
+              tsserver = { maxTsServerMemory = 2048 },
             },
+          },
+        },
+        -- Lint on save, not on every keystroke (still get diagnostics after :w)
+        eslint = {
+          flags = { debounce_text_changes = 500 },
+          settings = {
+            run = "onSave",
+            workingDirectories = { mode = "auto" },
           },
         },
       },

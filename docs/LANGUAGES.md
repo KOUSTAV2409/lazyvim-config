@@ -19,7 +19,7 @@ Autoformat **on save is off** (`vim.g.autoformat = false`). Format with **Shift+
 | **JavaScript / TypeScript** | `lang.typescript` + `javascript.lua` | **vtsls** | Prettier + ESLint | Snippets (`if`→Tab), brace Enter-indent, pairs |
 | **HTML** | `web.lua` (no LazyVim html extra) | **html-lsp**, Emmet | Prettier | `!` then Tab → HTML5; **Alt+W** wrap |
 | **CSS / SCSS** | `web.lua` + prettier | **cssls** (+ html embedded) | Prettier | Emmet filtered inside HTML `<style>` junk tags |
-| **JS/CSS inside HTML** | `web.lua` (**otter.nvim**) | otter → vtsls / css | — | `:OtterActivate` if needed |
+| **JS/CSS inside HTML** | `web.lua` (**otter.nvim**) | otter → vtsls (JS); html embedded CSS | — | `:OtterActivate` if needed |
 | **Tailwind** | `lang.tailwind` + `mini-hipatterns` | tailwindcss LS | — | Class completions + color hints |
 | **JSON** | `lang.json` | jsonls + SchemaStore | Prettier | |
 | **YAML / TOML** | `lang.yaml` / `lang.toml` | yamlls / taplo | — | |
@@ -48,8 +48,8 @@ LazyVim has **no** `lang.html` / `lang.css` extra. This repo’s `lua/plugins/we
 | Emmet abbreviation | e.g. `div>ul>li*3` then **Tab** (markup only) |
 | Wrap with tag | **Alt+W** |
 | Emmet expand (legacy) | **Ctrl+E** |
-| JS IntelliSense in `<script>` | otter.nvim (auto); `:OtterActivate` to force |
-| CSS in `<style>` | html/cssls/otter — Emmet HTML tags filtered out |
+| JS IntelliSense in `<script>` | otter.nvim (auto once per buffer); `:OtterActivate` to force |
+| CSS in `<style>` | html/cssls — Emmet HTML tags filtered out |
 
 `javascript.lua` fixes standalone `.js`/`.ts` (snippets + Enter between `{}`).
 
@@ -59,8 +59,9 @@ LazyVim has **no** `lang.html` / `lang.css` extra. This repo’s `lua/plugins/we
 
 - Extra: `lazyvim.plugins.extras.lang.python`  
 - LSP: **pyright** (types) + **ruff** (lint/format) — tuned in `lua/plugins/python.lua`  
-- Pyright analyzes **open files only**, imports are left to Ruff, and noisy “loading…” progress is hidden while typing  
-- Neovim 0.12 `document_color` is disabled (it was flushing LSP edits every keystroke)  
+- Shared typing quieting: `lua/plugins/lsp-perf.lua` (global debounce, Noice progress filters, lint on write)  
+- Pyright analyzes **open files only**, imports are left to Ruff  
+- Neovim 0.12 `document_color` disabled early in `options.lua`  
 - Debug: LazyVim DAP keys once `dap.core` is installed  
 - Tests: neotest when `test.core` is enabled  
 
@@ -71,7 +72,7 @@ Optional project markers: `pyproject.toml`, `requirements.txt`, … (prefer thes
 ## Ruby & Rails
 
 - Extra: `lang.ruby` (there is **no** separate Rails extra)  
-- `ruby_lsp` understands Rails apps with a `Gemfile`  
+- `ruby_lsp` for intelligence; **rubocop runs as formatter only** (not a second LSP) — see `lua/plugins/ruby.lua`  
 - ERB: `erb-formatter`, `erb-lint` via Mason  
 - Pair with `lang.sql`, `lang.tailwind`, prettier for full-stack Rails apps  
 
@@ -80,8 +81,17 @@ Optional project markers: `pyproject.toml`, `requirements.txt`, … (prefer thes
 ## C / C++
 
 - Extra: `lang.clangd`  
+- Tuned in `lua/plugins/clangd.lua`: completions on; **background-index / clang-tidy off by default** (uncomment for full analysis)  
 - Best results with `compile_commands.json` (CMake: `lang.cmake` helps)  
 - Debug: codelldb  
+
+---
+
+## Rust
+
+- Extra: `lang.rust` + `lua/plugins/rust.lua` (`allFeatures = false`, `check` not clippy-on-save)  
+- rust-analyzer (system PATH) — `rustup component add rust-analyzer`  
+- rustfmt via RA  
 
 ---
 
@@ -104,6 +114,14 @@ vim.g.dbs = {
 ```
 
 - sqlfluff dialect forced to **sqlite** in `languages.lua` (override per-project if you need postgres/mysql)
+- Heavy CLI linters (sqlfluff / hadolint) run on **BufWritePost / BufReadPost** only (`lsp-perf.lua`)
+
+---
+
+## Docker
+
+- Extra: `lang.docker`  
+- Compose YAML uses **docker_compose** LS only (yamlls skipped for compose) — `lua/plugins/docker.lua`
 
 ---
 

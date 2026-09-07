@@ -136,11 +136,13 @@ return {
     opts = {
       servers = {
         html = {
+          flags = { debounce_text_changes = 400 },
           filetypes = vim.list_extend(vim.deepcopy(HTML_FT), { "templ" }),
           init_options = {
             provideFormatter = false,
-            embeddedLanguages = { css = true, javascript = true },
-            configurationSection = { "html", "css", "javascript" },
+            -- CSS embedded in html-lsp; JS in <script> owned by otter→vtsls (avoid double work)
+            embeddedLanguages = { css = true, javascript = false },
+            configurationSection = { "html", "css" },
           },
           settings = {
             css = {
@@ -160,6 +162,7 @@ return {
           },
         },
         cssls = {
+          flags = { debounce_text_changes = 400 },
           init_options = { provideFormatter = false },
           capabilities = {
             textDocument = {
@@ -170,9 +173,14 @@ return {
         -- Works with or without tsconfig/jsconfig (otter .js buffers too)
         vtsls = {
           single_file_support = true,
+          flags = { debounce_text_changes = 500 },
+        },
+        tailwindcss = {
+          flags = { debounce_text_changes = 400 },
         },
         -- Emmet for markup + standalone CSS. Filtered out inside <style>/<script>.
         emmet_language_server = {
+          flags = { debounce_text_changes = 300 },
           filetypes = {
             "html",
             "htmldjango",
@@ -186,7 +194,7 @@ return {
           },
           init_options = {
             showAbbreviationSuggestions = true,
-            showExpandedAbbreviation = "always",
+            showExpandedAbbreviation = "inMarkupAndStylesheetFilesOnly",
             showSuggestionsAsSnippets = true,
           },
         },
@@ -225,9 +233,16 @@ return {
       local otter = require("otter")
       otter.setup(opts)
 
-      local function activate(bufnr)
+      -- Activate once per buffer. Re-calling otter.activate rebuilds rafts and
+      -- re-attaches vtsls — that felt like constant "loading" on every InsertEnter.
+      local activated = {} ---@type table<number, boolean>
+
+      local function activate(bufnr, force)
         bufnr = bufnr or vim.api.nvim_get_current_buf()
         if not vim.api.nvim_buf_is_valid(bufnr) then
+          return
+        end
+        if activated[bufnr] and not force then
           return
         end
         if not is_html_ft(vim.bo[bufnr].filetype) then
@@ -236,7 +251,11 @@ return {
         if not pcall(vim.treesitter.get_parser, bufnr) then
           return
         end
-        pcall(otter.activate, { "javascript", "css" }, true, true)
+        -- JS only: html-lsp already covers embedded CSS
+        local ok = pcall(otter.activate, { "javascript" }, true, true)
+        if ok then
+          activated[bufnr] = true
+        end
       end
 
       vim.api.nvim_create_autocmd("FileType", {
@@ -247,23 +266,32 @@ return {
             activate(buf)
           end, 200)
           vim.defer_fn(function()
-            activate(buf)
+            if not activated[buf] then
+              activate(buf)
+            end
           end, 1000)
         end,
       })
 
-      -- Re-activate on insert (covers long-lived sessions / late parser ready)
       vim.api.nvim_create_autocmd("InsertEnter", {
         pattern = HTML_GLOB,
         callback = function(ev)
-          activate(ev.buf)
+          if not activated[ev.buf] then
+            activate(ev.buf)
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
+        callback = function(ev)
+          activated[ev.buf] = nil
         end,
       })
 
       vim.api.nvim_create_user_command("OtterActivate", function()
-        activate(0)
-        vim.notify("Otter activated (JS/CSS in HTML)", vim.log.levels.INFO)
-      end, { desc = "Activate otter JS/CSS IntelliSense for this HTML buffer" })
+        activate(0, true)
+        vim.notify("Otter activated (JS in HTML)", vim.log.levels.INFO)
+      end, { desc = "Activate otter JS IntelliSense for this HTML buffer" })
     end,
   },
 

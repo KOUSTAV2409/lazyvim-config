@@ -170,7 +170,7 @@ Useful examples:
 | Emmet abbr then `Tab` | I (HTML markup) | Expand (`div>ul>li*3`, etc.) |
 | `Ctrl+E` | I (HTML) | Emmet expand (backup) |
 | `Alt+W` | N/V/I | Wrap selection / tag with Emmet |
-| `:OtterActivate` | cmd | Force JS/CSS IntelliSense inside HTML |
+| `:OtterActivate` | cmd | Force JS IntelliSense inside HTML `<script>` |
 
 Inside `<script>` / `<style>`, Emmet HTML junk is filtered so CSS/JS completions win.
 

@@ -110,7 +110,8 @@ Do **not** keep two divergent copies (`~/.config/nvim` and `~/Projects/lazyvim-c
 | Symptom | Fix |
 |---------|-----|
 | Huge diagnostic counts on a tiny/fixed file | Stale LSP cascade — run **`:lsp restart`** (Neovim **0.12+**). On 0.11.x use `:LspRestart`. Or `:bd` and reopen the file. |
-| Pyright “loading” on every keystroke | Tuned in `lua/plugins/python.lua` (debounce, openFilesOnly, hide progress). Prefer a project root (`pyproject.toml` / `requirements.txt`). Restart Neovim once after pull. |
+| Pyright / vtsls “loading” on every keystroke | Fixed via `lsp-perf.lua` + language tunings. Restart Neovim after pull. Prefer real project roots (`pyproject.toml`, `package.json`, …). |
+| Want full clangd index / tidy | Uncomment flags in `lua/plugins/clangd.lua` |
 | `E492: Not an editor command: LspRestart` | You’re on Neovim 0.12+ — use **`:lsp restart`** instead. |
 | Ruby `Invalid byte sequence in utf-8` but file looks fine | Buffer has bad bytes; disk may be clean. **`:e!`** to reload, or rewrite/save as UTF-8 (`:set fileencoding=utf-8`). |
 | No colorscheme / theme errors | Create `lua/plugins/theme.lua` (symlink or copy example) — it is not in git. |
