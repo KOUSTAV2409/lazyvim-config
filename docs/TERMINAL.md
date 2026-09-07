@@ -6,6 +6,7 @@ This config was tuned on **Omarchy + Foot**. On Foot, `~/.config/foot/foot.ini` 
 
 - `Ctrl+\`` / `Ctrl+Shift+\``  
 - `Ctrl+Tab` / `Ctrl+Shift+Tab`  
+- `Ctrl+Backspace` / `Ctrl+Delete` (word delete; avoids default Ctrl+W)  
 - Several `Ctrl+Shift+…` editor chords  
 
 That Foot file lives in the full-machine repo:  

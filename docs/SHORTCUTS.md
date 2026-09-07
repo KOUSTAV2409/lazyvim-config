@@ -23,6 +23,7 @@ This config adds that familiar layer on top of LazyVim. LazyVim’s own keys (es
 | `Ctrl+D` / `Ctrl+Shift+D` | N/I | Duplicate line |
 | `Ctrl+Shift+K` | N/I/V | Delete line / selection |
 | `Ctrl+/` | N/I/V | Toggle comment |
+| `Alt+Z` | N/I/V | Toggle word wrap |
 | `Ctrl+]` | N/I/V | Indent |
 | `Tab` / `Shift+Tab` | V | Indent / outdent selection |
 | `Alt+↑` / `Alt+↓` | N/I/V | Move line / selection |
@@ -59,6 +60,8 @@ This config adds that familiar layer on top of LazyVim. LazyVim’s own keys (es
 | `Shift+arrows` | N/V | Start / extend selection |
 | `Ctrl+Shift+Left/Right` | N/V | Select by word |
 | `Ctrl+Left/Right` | I | Move by word in insert |
+| `Ctrl+Backspace` | N/I/C | Delete word left (VS Code; not Ctrl+W - that closes the tab) |
+| `Ctrl+Delete` | N/I/C | Delete word right |
 
 Prefer learning Vim selection too: `v` / `V` / `vw` / `vig` then `y` `d` `c`.
 

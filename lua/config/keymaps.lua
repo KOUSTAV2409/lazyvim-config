@@ -135,6 +135,12 @@ map("v", "<C-S-k>", "d", { desc = "Delete Selection" })
 map({ "n", "i", "v" }, "<C-z>", "<Esc>u", { desc = "Undo" })
 map({ "n", "i", "v" }, "<C-y>", "<Esc><C-r>", { desc = "Redo" })
 
+-- Toggle soft wrap (VS Code Alt+Z)
+map({ "n", "i", "v" }, "<A-z>", function()
+  vim.opt_local.wrap = not vim.opt_local.wrap:get()
+  vim.notify(vim.opt_local.wrap:get() and "Wrap: on" or "Wrap: off", vim.log.levels.INFO)
+end, { desc = "Toggle Word Wrap" })
+
 -- Toggle comment (terminals often send <C-_> for Ctrl+/)
 map("n", "<C-/>", "gcc", { remap = true, desc = "Toggle Comment" })
 map("n", "<C-_>", "gcc", { remap = true, desc = "Toggle Comment" })
@@ -172,6 +178,36 @@ map("v", "<C-S-Right>", "E", { desc = "Extend Word Right" })
 -- Insert-mode word hops (VS Code Ctrl+Left/Right)
 map("i", "<C-Left>", "<C-o>b", { desc = "Word Left" })
 map("i", "<C-Right>", "<C-o>w", { desc = "Word Right" })
+
+-- Word delete (VS Code Ctrl+Backspace / Ctrl+Delete).
+-- Ctrl+W closes the tab in this config, so word-delete is on Ctrl+Backspace.
+-- Foot must send CSI-u for Ctrl+Backspace (see docs/TERMINAL.md).
+map("i", "<C-BS>", "<C-g>u<C-w>", { desc = "Delete Word Left" })
+map("i", "<C-Backspace>", "<C-g>u<C-w>", { desc = "Delete Word Left" })
+map("i", "<C-Del>", "<C-g>u<C-o>dw", { desc = "Delete Word Right" })
+map("i", "<C-Delete>", "<C-g>u<C-o>dw", { desc = "Delete Word Right" })
+
+map("n", "<C-BS>", "db", { desc = "Delete Word Left" })
+map("n", "<C-Backspace>", "db", { desc = "Delete Word Left" })
+map("n", "<C-Del>", "dw", { desc = "Delete Word Right" })
+map("n", "<C-Delete>", "dw", { desc = "Delete Word Right" })
+
+-- Command-line / search textbox (`:` `/` `?`)
+map("c", "<C-BS>", "<C-w>", { desc = "Delete Word Left" })
+map("c", "<C-Backspace>", "<C-w>", { desc = "Delete Word Left" })
+local function cmdline_del_word_right()
+  local line = vim.fn.getcmdline()
+  local pos = vim.fn.getcmdpos()
+  local before = line:sub(1, pos - 1)
+  local after = line:sub(pos)
+  local trimmed = after:gsub("^%S+%s*", "", 1)
+  if trimmed == after then
+    trimmed = after:gsub("^%s+%S*%s*", "", 1)
+  end
+  vim.fn.setcmdline(before .. trimmed, #before + 1)
+end
+map("c", "<C-Del>", cmdline_del_word_right, { desc = "Delete Word Right" })
+map("c", "<C-Delete>", cmdline_del_word_right, { desc = "Delete Word Right" })
 
 -- ----------------------------------------------------------------------------
 -- 5. Go to / LSP (VS Code-ish)
