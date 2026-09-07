@@ -1,7 +1,8 @@
 -- VS Code–style web editing for LazyVim (GLOBAL — every project, every .html).
 --
--- Markup:  html-lsp + Emmet (`!` / `div>` → Tab) + Alt+W wrap
--- <style>: cssls / html embedded CSS / otter CSS (Emmet HTML junk filtered)
+-- Markup:  Emmet LS + html-lsp (deduped) + Tab expand + Alt+W wrap
+--          ts-autotag rename only in HTML (auto-close off — Emmet already closes)
+-- <style>: cssls / html embedded CSS (Emmet HTML junk filtered)
 -- <script>: otter → vtsls + DOM libs (Emmet / HTML-tag junk filtered)
 --
 -- One stack everywhere. No per-project toggle. jsconfig.json is optional.
@@ -106,6 +107,22 @@ vim.g.user_emmet_complete_tag = 0
 vim.g.user_emmet_expandabbr_key = "<C-e>"
 vim.g.user_emmet_leader_key = "<C-y>"
 
+--- VS Code: Enter between `>` and `<` opens an indented blank line inside the tag.
+--- e.g. `<section>|</section>` → `<section>\n  |\n</section>`
+local function cr_between_tags()
+  if in_embedded() then
+    return "<CR>"
+  end
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local before = line:sub(col, col)
+  local after = line:sub(col + 1, col + 1)
+  if before == ">" and after == "<" then
+    return "<CR><Esc>O"
+  end
+  return "<CR>"
+end
+
 return {
   -- Always install web tools (not only when a project happens to have opened them once)
   {
@@ -128,7 +145,33 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = { "css", "scss", "javascript", "html" },
+      indent = { enable = true },
     },
+  },
+
+  -- VS Code-style Enter between tags for every HTML buffer
+  {
+    "nvim-mini/mini.pairs",
+    optional = true,
+    opts = function(_, opts)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = HTML_FT,
+        callback = function(ev)
+          vim.bo[ev.buf].expandtab = true
+          vim.bo[ev.buf].shiftwidth = 2
+          vim.bo[ev.buf].tabstop = 2
+          vim.bo[ev.buf].softtabstop = 2
+          vim.bo[ev.buf].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+
+          vim.keymap.set("i", "<CR>", cr_between_tags, {
+            buffer = ev.buf,
+            expr = true,
+            desc = "Indent between HTML tags",
+          })
+        end,
+      })
+      return opts
+    end,
   },
 
   {
@@ -395,6 +438,25 @@ return {
       }
       opts.completion.trigger = opts.completion.trigger or {}
       opts.completion.trigger.show_on_trigger_character = true
+      -- After accepting Emmet (`<section>$0</section>`), do not reopen the menu
+      -- while the snippet is still active (that caused sticky `</section>` / `a~` spam).
+      opts.completion.trigger.show_in_snippet = false
+      opts.completion.trigger.show_on_accept_on_trigger_character = false
+
+      opts.completion.menu = opts.completion.menu or {}
+      local prev_auto_show = opts.completion.menu.auto_show
+      opts.completion.menu.auto_show = function(ctx, items)
+        if is_html_ft() and not in_embedded() then
+          local ok, blink = pcall(require, "blink.cmp")
+          if ok and blink.snippet_active({ direction = 1 }) then
+            return false
+          end
+        end
+        if type(prev_auto_show) == "function" then
+          return prev_auto_show(ctx, items)
+        end
+        return prev_auto_show ~= false
+      end
 
       opts.sources = opts.sources or {}
       opts.sources.providers = opts.sources.providers or {}
@@ -416,10 +478,12 @@ return {
       end
       opts.sources.providers.buffer = buffer
 
+      -- Emmet owns HTML abbreviations. friendly-snippets (`a~`, `dateDMY~`, …)
+      -- only fight Emmet/html-lsp and keep the menu sticky after Enter.
       local snippets = opts.sources.providers.snippets or {}
       local prev_snip = snippets.enabled
       snippets.enabled = function(ctx)
-        if in_embedded() then
+        if is_html_ft() then
           return false
         end
         if type(prev_snip) == "function" then
@@ -469,9 +533,45 @@ return {
           end, items)
         end
 
+        -- Markup: prefer Emmet for tag expand; drop html-lsp duplicates of the
+        -- same abbreviation so Enter accepts one clean `<tag>$0</tag>` snippet.
+        if is_html_ft() and not in_embedded() then
+          local has_emmet = false
+          for _, item in ipairs(items) do
+            if is_emmet_client(item.client_name) then
+              has_emmet = true
+              break
+            end
+          end
+          if has_emmet then
+            return vim.tbl_filter(function(item)
+              if item.client_name == "html" and is_html_tag_completion(item) then
+                return false
+              end
+              return true
+            end, items)
+          end
+        end
+
         return items
       end
       opts.sources.providers.lsp = lsp
+
+      -- Enter: accept once, then hide (do not leave a second popup open).
+      opts.keymap["<CR>"] = {
+        function(cmp)
+          if cmp.is_menu_visible() then
+            cmp.select_and_accept()
+            vim.schedule(function()
+              pcall(function()
+                require("blink.cmp").hide()
+              end)
+            end)
+            return true
+          end
+        end,
+        "fallback",
+      }
     end,
   },
 
@@ -492,9 +592,14 @@ return {
     "windwp/nvim-ts-autotag",
     opts = {
       opts = {
+        -- Keep rename; auto-close fights Emmet/html snippets (`</section></section>`).
         enable_close = true,
         enable_rename = true,
         enable_close_on_slash = false,
+      },
+      per_filetype = {
+        html = { enable_close = false },
+        htmldjango = { enable_close = false },
       },
     },
   },
