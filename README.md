@@ -94,6 +94,7 @@ lua/config/keymaps.lua              VS Code–familiar maps + replace
 lua/config/options.lua              comfort options (no format-on-save)
 lua/plugins/web.lua                 HTML/CSS/Emmet/otter (global)
 lua/plugins/javascript.lua          standalone JS/TS DX
+lua/plugins/python.lua              pyright/ruff tuning + quiet progress
 lua/plugins/languages.lua           treesitter + mason + sqlfluff sqlite
 lua/plugins/vscode-ux.lua           mini.move + multicursor + sticky scroll
 lua/plugins/snacks-*.lua            bottom / floating terminal

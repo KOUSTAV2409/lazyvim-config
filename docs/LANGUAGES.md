@@ -58,11 +58,13 @@ LazyVim has **no** `lang.html` / `lang.css` extra. This repo’s `lua/plugins/we
 ## Python
 
 - Extra: `lazyvim.plugins.extras.lang.python`  
-- LSP: pyright (types) + ruff (lint/format)  
-- Debug: open a file, use LazyVim DAP keys once `dap.core` is installed  
+- LSP: **pyright** (types) + **ruff** (lint/format) — tuned in `lua/plugins/python.lua`  
+- Pyright analyzes **open files only**, imports are left to Ruff, and noisy “loading…” progress is hidden while typing  
+- Neovim 0.12 `document_color` is disabled (it was flushing LSP edits every keystroke)  
+- Debug: LazyVim DAP keys once `dap.core` is installed  
 - Tests: neotest when `test.core` is enabled  
 
-Optional project markers: `pyproject.toml`, `requirements.txt`, …
+Optional project markers: `pyproject.toml`, `requirements.txt`, … (prefer these so pyright gets a real root instead of a single-file workspace).
 
 ---
 
