@@ -107,17 +107,31 @@ vim.g.user_emmet_complete_tag = 0
 vim.g.user_emmet_expandabbr_key = "<C-e>"
 vim.g.user_emmet_leader_key = "<C-y>"
 
---- VS Code: Enter between `>` and `<` opens an indented blank line inside the tag.
---- e.g. `<section>|</section>` → `<section>\n  |\n</section>`
-local function cr_between_tags()
-  if in_embedded() then
-    return "<CR>"
-  end
+--- VS Code: Enter between paired delimiters opens an indented blank line.
+--- - tags:  `<section>|</section>` / `<style>|</style>`
+--- - braces: `body {|}` inside `<style>` (or `<script>`)
+local function cursor_neighbors()
   local line = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2]
-  local before = line:sub(col, col)
-  local after = line:sub(col + 1, col + 1)
+  return line:sub(col, col), line:sub(col + 1, col + 1)
+end
+
+local function is_between_pair()
+  local before, after = cursor_neighbors()
   if before == ">" and after == "<" then
+    return true
+  end
+  local pairs = { ["("] = ")", ["["] = "]", ["{"] = "}" }
+  return pairs[before] ~= nil and after == pairs[before]
+end
+
+local function is_web_indent_ft(ft)
+  ft = ft or vim.bo.filetype
+  return is_html_ft(ft) or ft == "css" or ft == "scss"
+end
+
+local function cr_smart_indent()
+  if is_between_pair() then
     return "<CR><Esc>O"
   end
   return "<CR>"
@@ -149,25 +163,37 @@ return {
     },
   },
 
-  -- VS Code-style Enter between tags for every HTML buffer
+  -- VS Code-style Enter between tags / braces for HTML (+ standalone CSS)
   {
     "nvim-mini/mini.pairs",
     optional = true,
     opts = function(_, opts)
+      local function setup_cr(bufnr)
+        vim.bo[bufnr].expandtab = true
+        vim.bo[bufnr].shiftwidth = 2
+        vim.bo[bufnr].tabstop = 2
+        vim.bo[bufnr].softtabstop = 2
+        vim.bo[bufnr].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+
+        vim.keymap.set("i", "<CR>", cr_smart_indent, {
+          buffer = bufnr,
+          expr = true,
+          desc = "Indent between tags/braces",
+        })
+      end
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = HTML_FT,
         callback = function(ev)
-          vim.bo[ev.buf].expandtab = true
-          vim.bo[ev.buf].shiftwidth = 2
-          vim.bo[ev.buf].tabstop = 2
-          vim.bo[ev.buf].softtabstop = 2
-          vim.bo[ev.buf].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+          setup_cr(ev.buf)
+        end,
+      })
 
-          vim.keymap.set("i", "<CR>", cr_between_tags, {
-            buffer = ev.buf,
-            expr = true,
-            desc = "Indent between HTML tags",
-          })
+      -- Standalone .css / .scss: Enter between {|} same as inside <style>
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "css", "scss" },
+        callback = function(ev)
+          setup_cr(ev.buf)
         end,
       })
       return opts
@@ -442,10 +468,26 @@ return {
       -- while the snippet is still active (that caused sticky `</section>` / `a~` spam).
       opts.completion.trigger.show_in_snippet = false
       opts.completion.trigger.show_on_accept_on_trigger_character = false
+      -- Typing `{` (mini.pairs → `{|}`) must not pop CSS property spam; type a
+      -- letter first, or <C-Space>. Keeps Enter free for the indent gap.
+      local prev_blocked = opts.completion.trigger.show_on_blocked_trigger_characters
+      opts.completion.trigger.show_on_blocked_trigger_characters = function()
+        if is_web_indent_ft() then
+          return { " ", "\n", "\t", "{", "}", "(", ")", "[", "]", ">", "<" }
+        end
+        if type(prev_blocked) == "function" then
+          return prev_blocked()
+        end
+        return prev_blocked or { " ", "\n", "\t" }
+      end
 
       opts.completion.menu = opts.completion.menu or {}
       local prev_auto_show = opts.completion.menu.auto_show
       opts.completion.menu.auto_show = function(ctx, items)
+        -- Empty `{|}` / `>|</`: no menu — Enter should open a gap, not accept `border`.
+        if is_web_indent_ft() and is_between_pair() then
+          return false
+        end
         if is_html_ft() and not in_embedded() then
           local ok, blink = pcall(require, "blink.cmp")
           if ok and blink.snippet_active({ direction = 1 }) then
@@ -557,18 +599,24 @@ return {
       end
       opts.sources.providers.lsp = lsp
 
-      -- Enter: accept once, then hide (do not leave a second popup open).
+      -- Enter: between `{|}` / `>|</` → indent gap (VS Code habit).
+      -- Otherwise accept once and hide. Tab still accepts when the menu is open.
       opts.keymap["<CR>"] = {
         function(cmp)
-          if cmp.is_menu_visible() then
-            cmp.select_and_accept()
-            vim.schedule(function()
-              pcall(function()
-                require("blink.cmp").hide()
-              end)
-            end)
-            return true
+          if not cmp.is_menu_visible() then
+            return
           end
+          if is_web_indent_ft() and is_between_pair() then
+            cmp.hide()
+            return -- fallback → cr_smart_indent
+          end
+          cmp.select_and_accept()
+          vim.schedule(function()
+            pcall(function()
+              require("blink.cmp").hide()
+            end)
+          end)
+          return true
         end,
         "fallback",
       }
