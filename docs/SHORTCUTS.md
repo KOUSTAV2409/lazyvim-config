@@ -1,6 +1,6 @@
 # Shortcuts reference
 
-These Ctrl shortcuts exist so people with **normal editor intuition** (`Ctrl+C` / `Ctrl+V` / …) can use Neovim without throwing away what they already know. Vim and `Space` are extras — see [PHILOSOPHY.md](PHILOSOPHY.md).
+These Ctrl shortcuts exist so people with **normal editor intuition** (`Ctrl+C` / `Ctrl+V` / …) can use Neovim without throwing away what they already know. Vim and `Space` are extras - see [PHILOSOPHY.md](PHILOSOPHY.md).
 
 Legend: **N** normal · **I** insert · **V** visual · **T** terminal
 
@@ -109,7 +109,7 @@ See [TERMINAL.md](TERMINAL.md) if chords do not reach Neovim.
 
 ---
 
-## Leader (`Space`) — learn this
+## Leader (`Space`) - learn this
 
 Press `Space` and **wait**. which-key lists groups.
 
@@ -158,7 +158,7 @@ Useful examples:
 | `s` | Flash jump (LazyVim) |
 | `%` | Match `()` `{}` `[]` |
 
-**Visual block:** use LazyVim/`Ctrl+Q` or learn another mapping if you need block select — this config prioritizes Ctrl+V paste like VS Code.
+**Visual block:** use LazyVim/`Ctrl+Q` or learn another mapping if you need block select - this config prioritizes Ctrl+V paste like VS Code.
 
 ---
 

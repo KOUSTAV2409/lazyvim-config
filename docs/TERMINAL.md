@@ -15,15 +15,15 @@ https://github.com/KOUSTAV2409/dotfiles (private) under `.config/foot/`.
 
 1. Try the LazyVim / Vim alternative (`Space` … or `/`, `gd`, …).  
 2. Check whether your terminal binds the same chord (copy/paste, search, new tab).  
-3. On Foot, free conflicting binds (`search-start=none`, etc.) and add `text-bindings` for CSI-u — see the dotfiles `foot.ini`.
+3. On Foot, free conflicting binds (`search-start=none`, etc.) and add `text-bindings` for CSI-u - see the dotfiles `foot.ini`.
 
 ## Known terminal pitfalls
 
 | Chord | Issue |
 |-------|--------|
-| `Ctrl+H` | Often Backspace; window-left in LazyVim normal mode — not used for “replace” |
-| `Ctrl+[` | Is Escape — never remap for outdent |
-| `Ctrl+/` | May arrive as `Ctrl+_` — this config maps both for comments / terminal hide |
+| `Ctrl+H` | Often Backspace; window-left in LazyVim normal mode - not used for “replace” |
+| `Ctrl+[` | Is Escape - never remap for outdent |
+| `Ctrl+/` | May arrive as `Ctrl+_` - this config maps both for comments / terminal hide |
 
 ## Integrated terminal (inside Neovim)
 

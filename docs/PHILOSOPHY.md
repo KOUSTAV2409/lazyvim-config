@@ -1,4 +1,4 @@
-# Philosophy — why this config exists
+# Philosophy - why this config exists
 
 ## Who this is for
 
@@ -25,15 +25,15 @@ When you open brand‑new Vim / Neovim, the default story is often:
 
 **Why should we have to?**
 
-If the goal is a lighter, faster tool — not a personality transplant — then Neovim should **respect the intuition you already have**, and invite Vim power as an *upgrade*, not as a gate.
+If the goal is a lighter, faster tool - not a personality transplant - then Neovim should **respect the intuition you already have**, and invite Vim power as an *upgrade*, not as a gate.
 
 That thinking is why this LazyVim config exists.
 
 ## What I actually wanted
 
-1. **Keep the universal shortcuts** — so day one feels like an editor, not a puzzle  
-2. **Stay lightweight** — Neovim / LazyVim instead of a heavy Electron IDE eating RAM  
-3. **Optionally go deeper** — `hjkl`, `/`, `dd`, visual + `y`/`d`/`c`, and `Space` (leader) when *you* are ready  
+1. **Keep the universal shortcuts** - so day one feels like an editor, not a puzzle  
+2. **Stay lightweight** - Neovim / LazyVim instead of a heavy Electron IDE eating RAM  
+3. **Optionally go deeper** - `hjkl`, `/`, `dd`, visual + `y`/`d`/`c`, and `Space` (leader) when *you* are ready  
 
 So this is not “VS Code clones Neovim.”  
 It is: **your lifelong editor intuition first; Vim speed second; low RAM always.**
@@ -46,8 +46,8 @@ Some Vim habits then become *better* than the old ways for specific jobs:
 | Habit | Why it can win later |
 |-------|----------------------|
 | `hjkl` | Navigate without leaving home row |
-| `u` | Undo is one key — still fine beside `Ctrl+Z` |
-| `vw` / `vig` then `y`/`d`/`c` | Select, then act — one language |
+| `u` | Undo is one key - still fine beside `Ctrl+Z` |
+| `vw` / `vig` then `y`/`d`/`c` | Select, then act - one language |
 | `dd` | Delete a line instantly |
 | `/` then `n`/`N` | Find without a heavy widget (for me) |
 
@@ -56,13 +56,13 @@ Both layers live here on purpose.
 
 ## Design rules
 
-1. **Universal Ctrl keys = first-class** — copy, paste, cut, undo, save, tabs, explorer, palette, terminal, LSP labels you already know.  
-2. **Vim / leader = growth path** — documented in [LEARNING.md](LEARNING.md), not forced as a wall.  
-3. **`/` = preferred find** — `Ctrl+F` simply starts `/` so the old reflex still works.  
-4. **Replace is explicit** — `Ctrl+Shift+H` for this file; `Space` `s` `r` for the project.  
-5. **Leader (`Space`) = LazyVim power menu** — press Space and wait; which-key teaches you.  
-6. **No agent-sidebar requirement** — this repo is the editor.  
-7. **Omarchy-friendly** — theme symlink when on Omarchy; optional elsewhere.
+1. **Universal Ctrl keys = first-class** - copy, paste, cut, undo, save, tabs, explorer, palette, terminal, LSP labels you already know.  
+2. **Vim / leader = growth path** - documented in [LEARNING.md](LEARNING.md), not forced as a wall.  
+3. **`/` = preferred find** - `Ctrl+F` simply starts `/` so the old reflex still works.  
+4. **Replace is explicit** - `Ctrl+Shift+H` for this file; `Space` `s` `r` for the project.  
+5. **Leader (`Space`) = LazyVim power menu** - press Space and wait; which-key teaches you.  
+6. **No agent-sidebar requirement** - this repo is the editor.  
+7. **Omarchy-friendly** - theme symlink when on Omarchy; optional elsewhere.
 
 ## What “same config” means for clones
 
@@ -72,7 +72,7 @@ If you clone this into `~/.config/nvim` and run `nvim`, you should get:
 - LazyVim’s `Space` leader groups  
 - The same learning path in [LEARNING.md](LEARNING.md)  
 
-You will **not** automatically get my whole desktop (Foot pass-through, Hyprland, themes) — that is the private `dotfiles` repo. See [TERMINAL.md](TERMINAL.md) for chord caveats.
+You will **not** automatically get my whole desktop (Foot pass-through, Hyprland, themes) - that is the private `dotfiles` repo. See [TERMINAL.md](TERMINAL.md) for chord caveats.
 
 ## Tone of the learning docs
 
@@ -83,6 +83,6 @@ You will **not** automatically get my whole desktop (Foot pass-through, Hyprland
 
 ## Gratitude & ownership
 
-I have not created Neovim, LazyVim, or the plugins. This repo is a **personal collection of config files** — glue and opinions on top of other people’s work. Full thanks: [CREDITS.md](CREDITS.md).
+I have not created Neovim, LazyVim, or the plugins. This repo is a **personal collection of config files** - glue and opinions on top of other people’s work. Full thanks: [CREDITS.md](CREDITS.md).
 
 Fork it, delete what you dislike, remap everything. It is a start, not a standard you owe loyalty to.

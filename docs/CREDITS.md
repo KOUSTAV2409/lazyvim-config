@@ -2,11 +2,11 @@
 
 I did **not** invent Neovim, LazyVim, or the plugins in this repo.
 
-This repository is only my **personal, opinionated collection of config files** — a starting point. The real work belongs to the open source community that builds and maintains the tools underneath.
+This repository is only my **personal, opinionated collection of config files** - a starting point. The real work belongs to the open source community that builds and maintains the tools underneath.
 
 ## Thank you
 
-In particular (non-exhaustive — LazyVim pulls in many more):
+In particular (non-exhaustive - LazyVim pulls in many more):
 
 | Project | Gratitude for |
 |---------|----------------|

@@ -9,7 +9,7 @@ Goal: on a new Linux boot or laptop, clone this repo and get the **same** LazyVi
 | Neovim **0.11+** (0.12+ fine) | LazyVim 8 / current LazyVim |
 | `git`, `curl`, network | clone + Mason installs |
 | A C compiler (optional) | treesitter parsers |
-| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby` + `gem install ruby-lsp`, `rustup`, `clang`, `sqlite` CLI for projects — Mason installs **editor tools**, not always the language itself |
+| Language runtimes as needed | `node`/`npm` for JS tools, `python`, `ruby` + `gem install ruby-lsp`, `rustup`, `clang`, `sqlite` CLI for projects - Mason installs **editor tools**, not always the language itself |
 
 `lua/plugins/theme.lua` is **not** in the repo (gitignored). You create it after clone (Omarchy symlink or copy `theme.lua.example`).
 
@@ -31,7 +31,7 @@ mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null   # optional: wipe ol
 # 2) Clone THIS repo as your Neovim config
 git clone https://github.com/KOUSTAV2409/lazyvim-config.git ~/.config/nvim
 
-# 3) Theme (required — not shipped in git)
+# 3) Theme (required - not shipped in git)
 # Omarchy:
 ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
   ~/.config/nvim/lua/plugins/theme.lua
@@ -39,7 +39,7 @@ ln -sfn ~/.local/state/omarchy/current/theme/neovim.lua \
 # Non-Omarchy: copy the example theme
 # cp ~/.config/nvim/lua/plugins/theme.lua.example ~/.config/nvim/lua/plugins/theme.lua
 
-# 4) Launch once (needs network) — Lazy + Mason install everything
+# 4) Launch once (needs network) - Lazy + Mason install everything
 nvim
 ```
 
@@ -76,8 +76,8 @@ On another machine: `git pull` inside the clone (or re-clone) and restart Neovim
 
 ## After install checklist
 
-1. `:Lazy` — plugins green / installed  
-2. `:Mason` — language servers / formatters present  
+1. `:Lazy` - plugins green / installed  
+2. `:Mason` - language servers / formatters present  
 3. Open sample files and smoke-test:
 
 | File | Expect |
@@ -88,10 +88,10 @@ On another machine: `git pull` inside the clone (or re-clone) and restart Neovim
 | `foo.rb` / `foo.html.erb` | ruby_lsp + ERB tools |
 | `foo.c` / `foo.cpp` | clangd |
 | `foo.lua` | lua_ls (core) |
-| `foo.sql` | dadbod + sqlfluff (sqlite dialect) — `<leader>D` for UI |
+| `foo.sql` | dadbod + sqlfluff (sqlite dialect) - `<leader>D` for UI |
 | Tailwind classes in HTML | completions + color hints (hipatterns) |
 
-4. Format on demand: **Shift+Alt+F** (autoformat on save is off by design — see `options.lua`)
+4. Format on demand: **Shift+Alt+F** (autoformat on save is off by design - see `options.lua`)
 
 ## Updating on this machine
 
@@ -109,18 +109,18 @@ Do **not** keep two divergent copies (`~/.config/nvim` and `~/Projects/lazyvim-c
 
 | Symptom | Fix |
 |---------|-----|
-| Huge diagnostic counts on a tiny/fixed file | Stale LSP cascade — run **`:lsp restart`** (Neovim **0.12+**). On 0.11.x use `:LspRestart`. Or `:bd` and reopen the file. |
+| Huge diagnostic counts on a tiny/fixed file | Stale LSP cascade - run **`:lsp restart`** (Neovim **0.12+**). On 0.11.x use `:LspRestart`. Or `:bd` and reopen the file. |
 | Pyright / vtsls “loading” on every keystroke | Fixed via `lsp-perf.lua` + language tunings. Restart Neovim after pull. Prefer real project roots (`pyproject.toml`, `package.json`, …). |
 | Ruby `cannot load such file -- bundler` / ruby_lsp quits | Run `gem install ruby-lsp` (mise/PATH Ruby). Config prefers that binary over Mason’s system-ruby wrapper. For apps, use a `Gemfile`. Then `:lsp restart`. |
 | Want full clangd index / tidy | Uncomment flags in `lua/plugins/clangd.lua` |
-| `E492: Not an editor command: LspRestart` | You’re on Neovim 0.12+ — use **`:lsp restart`** instead. |
+| `E492: Not an editor command: LspRestart` | You’re on Neovim 0.12+ - use **`:lsp restart`** instead. |
 | Ruby `Invalid byte sequence in utf-8` but file looks fine | Buffer has bad bytes; disk may be clean. **`:e!`** to reload, or rewrite/save as UTF-8 (`:set fileencoding=utf-8`). |
-| No colorscheme / theme errors | Create `lua/plugins/theme.lua` (symlink or copy example) — it is not in git. |
+| No colorscheme / theme errors | Create `lua/plugins/theme.lua` (symlink or copy example) - it is not in git. |
 | Mason still installing / packages aborted | Quit all Neovim instances, reopen once, wait for Mason to finish. |
 
 ## Related docs
 
-- [LANGUAGES.md](LANGUAGES.md) — what each language gets (extras, LSPs, keys)
-- [SHORTCUTS.md](SHORTCUTS.md) — keymaps
-- [PHILOSOPHY.md](PHILOSOPHY.md) — why VS Code chords stay
-- [CREDITS.md](CREDITS.md) — upstream credit
+- [LANGUAGES.md](LANGUAGES.md) - what each language gets (extras, LSPs, keys)
+- [SHORTCUTS.md](SHORTCUTS.md) - keymaps
+- [PHILOSOPHY.md](PHILOSOPHY.md) - why VS Code chords stay
+- [CREDITS.md](CREDITS.md) - upstream credit
