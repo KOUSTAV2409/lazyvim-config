@@ -17,7 +17,7 @@ Autoformat **on save is off** (`vim.g.autoformat = false`). Format with **Shift+
 | You write | Extra / module | LSP / intelligence | Format / lint | Notes |
 |-----------|----------------|--------------------|---------------|-------|
 | **JavaScript / TypeScript** | `lang.typescript` + `javascript.lua` | **vtsls** | Prettier + ESLint | Snippets (`if`→Tab), brace Enter-indent, pairs |
-| **HTML** | `web.lua` (no LazyVim html extra) | **html-lsp**, Emmet | Prettier | `!` then Tab → HTML5; **Alt+W** wrap |
+| **HTML** | `web.lua` + `live-preview.lua` | **html-lsp**, Emmet | Prettier | `!` then Tab → HTML5; **Alt+W** wrap; **Live Preview** (`Space` `lp`) refreshes browser on save |
 | **CSS / SCSS** | `web.lua` + prettier | **cssls** (+ html embedded) | Prettier | Emmet filtered inside HTML `<style>` junk tags |
 | **JS/CSS inside HTML** | `web.lua` (**otter.nvim**) | otter → vtsls (JS); html embedded CSS | - | `:OtterActivate` if needed |
 | **Tailwind** | `lang.tailwind` + `mini-hipatterns` | tailwindcss LS | - | Class completions + color hints |

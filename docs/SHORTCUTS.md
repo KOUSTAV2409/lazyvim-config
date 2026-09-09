@@ -173,9 +173,14 @@ Useful examples:
 | Emmet abbr then `Tab` | I (HTML markup) | Expand (`div>ul>li*3`, etc.) |
 | `Ctrl+E` | I (HTML) | Emmet expand (backup) |
 | `Alt+W` | N/V/I | Wrap selection / tag with Emmet |
+| `Space` `l` `p` | N | **Live Preview** start (browser; HTML refreshes on `Ctrl+S` / `:w`) |
+| `Alt+Shift+L` | N/I | Live Preview start (same) |
+| `Space` `l` `P` | N | Live Preview close |
 | `:OtterActivate` | cmd | Force JS IntelliSense inside HTML `<script>` |
 
 Inside `<script>` / `<style>`, Emmet HTML junk is filtered so CSS/JS completions win.
+
+**Live Preview tip:** open `index.html`, run Live Preview once, then keep saving - the browser reloads on each write. Linked CSS/JS under the project root are included.
 
 ---
 
