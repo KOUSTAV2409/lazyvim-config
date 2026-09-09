@@ -130,6 +130,18 @@ local function is_web_indent_ft(ft)
   return is_html_ft(ft) or ft == "css" or ft == "scss"
 end
 
+--- Cursor is inside class="…" / className="…" (where Tailwind IntelliSense belongs).
+local function in_html_class_attr()
+  if not is_html_ft() or in_embedded() then
+    return false
+  end
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local before = line:sub(1, col)
+  return before:find('class%s*=%s*["\'][^"\']*$') ~= nil
+    or before:find('className%s*=%s*["\'][^"\']*$') ~= nil
+end
+
 local function cr_smart_indent()
   if is_between_pair() then
     return "<CR><Esc>O"
@@ -464,9 +476,10 @@ return {
       }
       opts.completion.trigger = opts.completion.trigger or {}
       opts.completion.trigger.show_on_trigger_character = true
-      -- After accepting Emmet (`<section>$0</section>`), do not reopen the menu
-      -- while the snippet is still active (that caused sticky `</section>` / `a~` spam).
-      opts.completion.trigger.show_in_snippet = false
+      -- Must stay true: Emmet leaves snippets active inside tags, and Tailwind
+      -- class completions (class="bg-|") happen while that snippet is still open.
+      -- Empty-pair spam is handled by auto_show + is_between_pair() below.
+      opts.completion.trigger.show_in_snippet = true
       opts.completion.trigger.show_on_accept_on_trigger_character = false
       -- Typing `{` (mini.pairs → `{|}`) must not pop CSS property spam; type a
       -- letter first, or <C-Space>. Keeps Enter free for the indent gap.
@@ -484,15 +497,9 @@ return {
       opts.completion.menu = opts.completion.menu or {}
       local prev_auto_show = opts.completion.menu.auto_show
       opts.completion.menu.auto_show = function(ctx, items)
-        -- Empty `{|}` / `>|</`: no menu — Enter should open a gap, not accept `border`.
+        -- Empty `{|}` / `>|</`: no menu — Enter should open a gap, not accept junk.
         if is_web_indent_ft() and is_between_pair() then
           return false
-        end
-        if is_html_ft() and not in_embedded() then
-          local ok, blink = pcall(require, "blink.cmp")
-          if ok and blink.snippet_active({ direction = 1 }) then
-            return false
-          end
         end
         if type(prev_auto_show) == "function" then
           return prev_auto_show(ctx, items)
@@ -577,7 +584,26 @@ return {
 
         -- Markup: prefer Emmet for tag expand; drop html-lsp duplicates of the
         -- same abbreviation so Enter accepts one clean `<tag>$0</tag>` snippet.
+        -- Inside class="/className=": Tailwind wins — hide Emmet/html tag junk.
         if is_html_ft() and not in_embedded() then
+          if in_html_class_attr() then
+            local filtered = vim.tbl_filter(function(item)
+              if is_emmet_client(item.client_name) then
+                return false
+              end
+              if item.client_name == "html" and is_html_tag_completion(item) then
+                return false
+              end
+              return true
+            end, items)
+            for _, item in ipairs(filtered) do
+              if item.client_name == "tailwindcss" then
+                item.score_offset = (item.score_offset or 0) + 50
+              end
+            end
+            return filtered
+          end
+
           local has_emmet = false
           for _, item in ipairs(items) do
             if is_emmet_client(item.client_name) then
